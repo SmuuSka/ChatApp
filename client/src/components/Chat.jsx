@@ -1,6 +1,6 @@
-import Navbar from "../components/Navbar";
+import Navbar from "./Navbar";
 import React from "react";
-import SideBar from "../components/SideBar";
+import SideBar from "./SideBar";
 const Chat = () => {
     return(
         <>
