@@ -3,7 +3,7 @@ const Navbar= () =>{
     <nav>
       <span className = "logoNavbar">Great Chat</span>
       <div className="userNavbar">
-        <img src="" alt=""/>
+        <img src="client/src/pages" alt=""/>
         <span>Jussi</span>
         <button>Logout</button>
       </div>
