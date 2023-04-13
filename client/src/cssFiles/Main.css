@@ -1,0 +1,57 @@
+.BGVIDEO{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-height: 50%;
+    min-width: 100%;
+    z-index: -1;
+    transform: translateX(-50%) translateY(-50%);
+}
+.formContainerReg{
+}
+.formWrapperReg{
+}
+.logoReg{
+
+}
+.titleReg{
+
+}
+.formReg{
+}
+input{
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.form-group{
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+body{
+    background-color: antiquewhite;
+    border-style: solid;
+    border-color: black;
+    border-width: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 15%;
+
+}
+#root{
+}
+.RegLogoimg{
+    max-width: 35%;
+}
+.container-fluid{
+    width: 60%;
+}
+.spanDiv{
+    text-align: center;
+    display: grid;
+
+}
