@@ -12,4 +12,8 @@ app.use(cors());
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 
+app.get('/', (request, response) => {
+  return response.send('<h1>morjesta pöytään</h1>');
+});
+
 module.exports = app;

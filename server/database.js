@@ -8,11 +8,13 @@ async function createUserTable() {
   let conn;
   try {
     conn = await pool.getConnection();
+    console.log('connection succeeded');
     await conn.query(
         `CREATE TABLE IF NOT EXISTS testi (
           username varchar(50), password varchar(200) 
         )`,
     );
+    console.log('query succeeded');
   } catch (err) {
     console.log(err);
     throw err;
@@ -20,6 +22,7 @@ async function createUserTable() {
     if (conn) return conn.end();
   }
 }
+
 
 createUserTable();
 
