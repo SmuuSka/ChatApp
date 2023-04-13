@@ -19,11 +19,11 @@
 }
 .formReg{
 }
-input{
+#registerUsername,#registerPassword,#registerEmail,#registerFile,#loginUsername,#loginPassword{
     margin-bottom: 5px;
     margin-top: 5px;
 }
-button{
+#buttonLogReg{
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -32,7 +32,7 @@ button{
     margin-left: 10px;
     margin-right: 10px;
 }
-body{
+#registerBody,#loginBody{
     background-color: antiquewhite;
     border-style: solid;
     border-color: black;

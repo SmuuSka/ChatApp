@@ -1,10 +1,8 @@
-import React from 'react';
 import BGVIDEO from "../cssFiles/backgroundvid.mp4"
-
 const Register = () =>{
   return(
     <>
-      <div className="formContainerReg">
+      <div id = "registerBody" className="formContainerReg">
         <video className="BGVIDEO" src={BGVIDEO} autoPlay loop muted></video>
         <div className = "formWrapperReg" >
           <div className="spanDiv">
@@ -16,11 +14,11 @@ const Register = () =>{
         </span>
           </div>
           <form className="form-group">
-            <input type="text" className="form-control" placeholder="Username/Display Name"/>
-            <input type="email" className="form-control" placeholder="Email"/>
-            <input type="password"  className="form-control" placeholder="Password"/>
-            <input type="file" className="form-control-file" id="exampleFormControlFile1"/>
-            <button type="button" className="btn btn-primary">Register</button>
+            <input id = "registerUsername" type="text" className="form-control" placeholder="Username/Display Name"/>
+            <input id = "registerEmail" type="email" className="form-control" placeholder="Email"/>
+            <input  id = "registerPassword" type="password"  className="form-control" placeholder="Password"/>
+            <input id = "registerFile" type="file" className="form-control-file" id="exampleFormControlFile1"/>
+            <button id = "buttonLogReg" type="button" className="btn btn-primary">Register</button>
           </form>
 
         </div>
