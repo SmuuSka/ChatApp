@@ -1,7 +1,10 @@
+import Navbar from "./Navbar";
+
 const SideBar= () =>{
     return(
-        <aside id="sideBarChat">
-        </aside>
+        <div className="sideBarChat">
+            <Navbar/>
+        </div>
     );
 }
 export default SideBar;
