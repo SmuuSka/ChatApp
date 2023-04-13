@@ -1,5 +1,5 @@
 import Login from './pages/Login.jsx';
-import Chat from './pages/Chat.jsx';
+import Chat from './components/Chat.jsx';
 import './cssFiles/Main.css';
 import React from "react";
 import Register from "./pages/Register";
