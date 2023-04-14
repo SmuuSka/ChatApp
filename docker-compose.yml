@@ -17,8 +17,6 @@ services:
       context: ./server
     volumes:
       - /app/node_modules
-    ports:
-      - "3003:3003"
 
   client:
     stdin_open: true
@@ -31,26 +29,3 @@ services:
       - /app/node_modules
     ports:
       - "3000:3000"
-
-  mariadb:
-    image: mariadb:latest
-    restart: always
-    volumes:
-      - "./setup.sql:/docker-entrypoint-initdb.d/setup.sql"
-    env_file:
-      - ./server/.env
-    ports:
-      - "3306:3306"
-
-  phpmyadmin:
-    image: phpmyadmin
-    restart: always
-    expose:
-      - "8000"
-    ports:
-      - "8000:80"
-    environment:
-      - PMA_HOST=mariadb
-      - PMA_PORT=3306
-    links:
-      - mariadb
