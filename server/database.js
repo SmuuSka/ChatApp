@@ -26,7 +26,7 @@ async function createUserTable() {
 }
 
 
-createUserTable();
+await createUserTable();
 
 module.exports = pool;
 
