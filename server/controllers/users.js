@@ -41,7 +41,7 @@ const saveUser = async (username, password) => {
     console.log(err);
     throw err;
   } finally {
-    if (conn) conn.end();
+    if (conn) await conn.end();
   }
 };
 
