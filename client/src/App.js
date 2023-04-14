@@ -4,7 +4,7 @@ import './cssFiles/Main.css';
 
 function App() {
   return (
-    <Login/>
+    <Register/>
   );
 }
 
