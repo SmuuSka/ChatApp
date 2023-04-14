@@ -11,7 +11,9 @@ async function createUserTable() {
     console.log('connection succeeded');
     await conn.query(
         `CREATE TABLE IF NOT EXISTS testi (
-          username varchar(50), password varchar(200) 
+          id int AUTO_INCREMENT PRIMARY KEY,
+          username varchar(50) NOT NULL, 
+          password varchar(200) NOT NULL
         )`,
     );
     console.log('query succeeded');
