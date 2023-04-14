@@ -1,5 +1,33 @@
 import BGVIDEO from "../cssFiles/backgroundvid.mp4"
+import {useState} from "react";
+import registerService from '../services/registerService';
 const Register = () =>{
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const usernameChange = (event) => {
+    setUsername(event.target.value)
+    console.log(username)
+  }
+
+  const passwordChange = (event) => {
+    setPassword(event.target.value)
+    console.log(password)
+  }
+
+  const onRegisterSubmit = async (event) => {
+    const credentials = {username: username, password: password}
+    console.log(credentials)
+    try {
+      const response = await registerService.register(credentials);
+      console.log(response)
+    } catch (e) {
+      console.log(e)
+    }
+
+  }
+
   return(
     <>
       <div id = "registerBody" className="formContainerReg">
