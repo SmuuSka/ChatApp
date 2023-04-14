@@ -1,9 +1,10 @@
-import Login from './pages/Login.jsx';
+import Login from './pages/Login';
 import './cssFiles/Main.css';
 import React from "react";
+import Register from "./pages/Register";
 function App() {
   return (
-    <Login/>
+    <Register/>
   );
 }
 
