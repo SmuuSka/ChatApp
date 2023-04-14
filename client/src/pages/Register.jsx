@@ -41,12 +41,12 @@ const Register = () =>{
           <img className="RegLogoimg" src="Logochat.png"/>
         </span>
           </div>
-          <form className="form-group">
-            <input id = "registerUsername" type="text" className="form-control" placeholder="Username/Display Name"/>
+          <form className="form-group" onSubmit={onRegisterSubmit}>
+            <input id = "registerUsername" type="text" className="form-control" placeholder="Username/Display Name" onChange={usernameChange}/>
             <input id = "registerEmail" type="email" className="form-control" placeholder="Email"/>
-            <input  id = "registerPassword" type="password"  className="form-control" placeholder="Password"/>
+            <input  id = "registerPassword" type="password"  className="form-control" placeholder="Password" onChange={passwordChange}/>
             <input id = "registerFile" type="file" className="form-control-file" id="exampleFormControlFile1"/>
-            <button id = "buttonLogReg" type="button" className="btn btn-primary">Register</button>
+            <button id = "buttonLogReg" type="submit" className="btn btn-primary">Register</button>
           </form>
 
         </div>
