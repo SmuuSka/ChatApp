@@ -19,6 +19,7 @@ const Register = () =>{
   }
 
   const onRegisterSubmit = async (event) => {
+    event.preventDefault()
     const credentials = {username: username, password: password}
     console.log(credentials)
     try {
