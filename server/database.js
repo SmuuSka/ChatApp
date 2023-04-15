@@ -21,12 +21,12 @@ async function createUserTable() {
     console.log(err);
     throw err;
   } finally {
-    if (conn) return conn.end();
+    if (conn) await conn.end();
   }
 }
 
 
-await createUserTable();
+createUserTable();
 
 module.exports = pool;
 
