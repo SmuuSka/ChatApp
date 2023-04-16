@@ -19,11 +19,11 @@
 }
 .formReg{
 }
-input{
+#registerUsername,#registerPassword,#registerEmail,#registerFile,#loginUsername,#loginPassword{
     margin-bottom: 5px;
     margin-top: 5px;
 }
-button{
+#buttonLogReg{
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -32,7 +32,7 @@ button{
     margin-left: 10px;
     margin-right: 10px;
 }
-body{
+#registerBody,#loginBody{
     background-color: antiquewhite;
     border-style: solid;
     border-color: black;
@@ -40,18 +40,139 @@ body{
     display: flex;
     justify-content: center;
     margin-top: 15%;
-
 }
+
 #root{
 }
+
 .RegLogoimg{
     max-width: 35%;
 }
+
 .container-fluid{
-    width: 60%;
+    width: 80%;
 }
 .spanDiv{
     text-align: center;
     display: grid;
 
 }
+.home{
+    background-color: cadetblue;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-left: 0;
+    width: 85%;
+    height: 90%;
+    overflow: hidden;
+    display: flex;
+}
+.sideBarChat{
+    display: flex;
+    width: 30%;
+    background-color: darkgray;
+    align-items: end;
+    overflow: hidden;
+    flex-direction: column-reverse;
+}
+
+.chat{flex: 2;}
+
+.chatNavbar{
+    display: flex;
+    align-items: center;
+    background-color: aliceblue;
+    height: 65px;
+    justify-content: space-between;
+    width: 100%;
+}
+#chatUserImg{
+    background-color: aliceblue;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+    object-fit: cover;
+}
+#chatUserName{
+width: 100%;
+}
+.userNavbar{
+    display: flex;
+    width: 70%;
+    margin: auto;
+    flex-direction: initial;
+    justify-content: flex-end;
+}
+.buttonLogout{
+    background-color: crimson;
+    color: black;
+}
+
+.searchBar{
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin-bottom: auto;
+}
+
+.searchInput{
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 10%;
+    border-radius: 8px;
+    border: none;
+    color: black;
+    outline: none;
+    background-color: rgba(253, 253, 253, 0.77);
+}
+.searchInput::placeholder{
+    color: black;
+}
+.searchForm{
+    padding: 10px;
+}
+#searchbarTitle{
+    background-color: aquamarine;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-bottom: auto;
+}
+#searchFriendImage{
+    width: 70px;
+    height: 70px;
+    border-radius: 24%;
+    object-fit: cover;
+    overflow: hidden;
+}
+.searchFriendChatInfo{
+padding: 10px;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    color: white;
+    align-items: center;
+    overflow: hidden;
+}
+.searchFriendChatInfo:hover{
+    background-color: rgba(40, 44, 52, 0.6);
+}
+#searchUsername{
+
+    margin-left: auto;
+    margin-right: auto;
+}
+.chatTextInput{
+    height: 50px;
+    background-color: white;
+
+}
+

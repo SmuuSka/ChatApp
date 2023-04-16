@@ -1,9 +1,7 @@
-import React from 'react';
 import BGVIDEO from "../cssFiles/backgroundvid.mp4"
+import {useState} from "react";
 
-import { useState } from 'react'
 import loginService from '../services/loginService';
-
 const Login = () =>{
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -32,7 +30,7 @@ const Login = () =>{
 
   return(
     <>
-      <div className="formContainerReg">
+      <div id = "loginBody" className="formContainerReg">
         <video className="BGVIDEO" src={BGVIDEO} autoPlay loop muted></video>
         <div className = "formWrapperReg" >
           <div className="spanDiv">
@@ -44,10 +42,10 @@ const Login = () =>{
         </span>
           </div>
           <form className="form-group" onSubmit={onLogin}>
-            <input type="text" className="form-control" placeholder="Username/Display Name" onChange={usernameChange}/>
-            <input type="password"  className="form-control" placeholder="Password" onChange={passwordChange}/>
-            <button type="submit" className="btn btn-primary">Login</button>
-            <p>Dont have an account?</p>
+            <input id = "loginUsername"  type="text" className="form-control" placeholder="Username/Display Name" onChange={usernameChange}/>
+            <input id = "loginPassWord" type="password"  className="form-control" placeholder="Password" onChange={passwordChange}/>
+            <button  id = "buttonLogReg" type="button" className="btn btn-primary">Login</button>
+            <p>Dont have an account? Register</p>
           </form>
 
         </div>
@@ -57,5 +55,3 @@ const Login = () =>{
 }
 
 export default Login;
-
-
