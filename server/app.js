@@ -13,6 +13,9 @@ app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/chat', roomRouter);
 
+const queries = require('./queries');
+queries.createUserTable();
+
 app.get('/', (request, response) => {
   return response.send('<h1>morjesta pöytään</h1>');
 });
