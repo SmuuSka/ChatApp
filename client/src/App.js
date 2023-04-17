@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 function App() {
   return (
       <Routes>
-          <Route exact path="/" element={<Login />}/>
+          <Route exact path="/" element={<Home />}/>
           <Route path="/pages/Register" element={<Register />}/>
           <Route path="/pages/Home" element={<Home/>}/>
       </Routes>
