@@ -14,8 +14,8 @@ const Input = ({socket}) => {
 
     return(
         <div class="input-field">
-            <input type="text" placeholder="Kirjoita viesti..." onChange={newMessageChange} value={newMessage}/>
-            <button type="submit" onClick={onMessage}>Lähetä</button>
+            <input  className="chatTextInput" type="text" placeholder="Kirjoita viesti..." onChange={newMessageChange} value={newMessage}/>
+            <button id = "chatSendMessageButton"type="submit" onClick={onMessage}>Lähetä</button>
         </div>
     );
 }

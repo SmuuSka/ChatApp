@@ -107,6 +107,9 @@
 #chatMessageText{
     align-self: center;
 }
+#chatTextInput{
+    padding: 4px;
+}
 #chatUserImg{
     background-color: aliceblue;
     height: 50px;
@@ -124,9 +127,9 @@ width: 100%;
     background-color: white;
     align-items: center;
     display: flex;
-}
-#inputSendChatText{
     outline: none;
+    margin-right: auto;
+    width: 100%;
 }
 .chatBOX{
     background-color: white;
@@ -140,8 +143,8 @@ width: 100%;
     align-self: flex-start;
     margin-left: 2%;
 }
-.chatBox{
-    overflow: scroll;
+.chatBOX{
+    overflow: auto;
 }
 
 .userNavbar{
@@ -160,6 +163,7 @@ width: 100%;
     border-bottom: 1px solid black;
     width: 100%;
     margin-bottom: auto;
+    overflow: auto;
 }
 
 .searchInput{
@@ -177,6 +181,8 @@ width: 100%;
 }
 .searchForm{
     padding: 10px;
+    align-items: center;
+    display: grid;
 }
 #searchbarTitle{
     background-color: aquamarine;
@@ -221,35 +227,37 @@ padding: 10px;
     display: flex;
     align-items: flex-start;
     margin-bottom: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
   }
-  
+
   .message-avatar {
     margin-right: 10px;
   }
-  
+
   .message-avatar img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
   }
-  
+
   .message-body {
     display: flex;
     flex-direction: column;
   }
-  
+
   .message-author {
     font-weight: bold;
     margin-bottom: 5px;
   }
-  
+
   .message-content {
     background-color: #f1f0f0;
     padding: 10px;
     border-radius: 10px;
     max-width: 400px;
   }
-  
+
   .message-time {
     font-size: 12px;
     color: #999999;
@@ -258,13 +266,14 @@ padding: 10px;
 
 
   .input-field {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px 0;
+      padding: 6px;
   }
-  
-  input[type="text"] {
+
+  #chatTextInput[type="text"] {
     flex-grow: 1;
     padding: 1%;
     border: none;
@@ -272,8 +281,8 @@ padding: 10px;
     font-size: 16px;
     outline: none;
   }
-  
-  button[type="submit"] {
+
+  #chatSendMessageButton[type="submit"] {
     margin-left: 10px;
     padding: 1% 2%;
     background-color: #4CAF50;
@@ -282,7 +291,18 @@ padding: 10px;
     font-size: 16px;
     cursor: pointer;
   }
-  
-  button[type="submit"]:hover {
+    #createRoomButtonConfirm{
+        margin-top: 0;
+    }
+  #chatSendMessageButton[type="submit"]:hover {
     background-color: #3e8e41;
+  }
+  #roomCreation{
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      overflow: auto;
+  }
+  #roomImageTitle,#roomNameTitle{
+      margin: 2%;
   }
