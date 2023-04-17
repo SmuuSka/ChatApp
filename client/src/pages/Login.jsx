@@ -1,12 +1,14 @@
-import BGVIDEO from "../cssFiles/backgroundvid.mp4"
+import BGVIDEO from "../cssFiles/backgroundvid.mp4";
 import {useState} from "react";
 import React from "react";
 import {Route, Routes,Link,redirect} from 'react-router-dom';
 import loginService from '../services/loginService';
 import Register from "./Register";
 const Login = () =>{
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   const usernameChange = (event) => {
     setUsername(event.target.value)
@@ -24,9 +26,10 @@ const Login = () =>{
     try {
       console.log(credentials)
       const response = await loginService.login(credentials)
-      redirect("/pages/Home");
-      console.log(response.data)
+      setUser(response)
+      window.localStorage.setItem('loggedUser', JSON.stringify(user))
     } catch (e) {
+      console.log('login failed wrong user name or password')
       console.log(e)
     }
   }
