@@ -7,10 +7,10 @@ const pool = require('../database');
 loginRouter.post('/', async (request, response) => {
   const {username, password} = request.body;
 
-  let user = await findUser(username);
-  user = user[0];
+  const user = await findUser(username);
+  console.log('user is' + user);
 
-  const passwordCorrect = user === null ?
+  const passwordCorrect = user === undefined ?
     false :
     await bcrypt.compare(password, user.password);
 
@@ -44,7 +44,7 @@ const findUser = async (username) => {
     const find = await conn.query(`
     SELECT * FROM testi
     WHERE username=?`, [username]);
-    return JSON.parse(JSON.stringify(find));
+    return JSON.parse(JSON.stringify(find))[0];
   } catch (err) {
     console.log(err);
     throw err;
