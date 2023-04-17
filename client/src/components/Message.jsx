@@ -1,6 +1,7 @@
 import React from "react";
 
-const Message = () => {
+const Message = ({message}) => {
+    console.log(message)
     return(
         <div class="message">
             <div class="message-avatar">
@@ -9,7 +10,7 @@ const Message = () => {
             <div class="message-body">
                 <div class="message-author">John Doe</div>
                 <div class="message-content">
-                    Hey, how's it going?
+                    {message}
                 </div>
                 <div class="message-time">12:30 PM</div>
             </div>

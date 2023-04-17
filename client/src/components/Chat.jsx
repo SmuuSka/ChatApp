@@ -1,12 +1,21 @@
-import React from "react";
 import Input from "./Input";
 import Chats from "./Chats";
-const Chat = () => {
+import { useState } from "react";
+
+const Chat = ({socket}) => {
+
+    const [messages, setMessages] = useState([])
+
+    socket.on('message', message => {
+        setMessages(messages.concat(message))
+    })
+
     return(
         <div className="chat">
-            <Input/>
-            <Chats/>
+            <Input socket={socket}/>
+            <Chats messages={messages}/>
         </div>
     );
 }
+
 export default Chat;
