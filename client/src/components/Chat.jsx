@@ -1,11 +1,11 @@
-import Navbar from "./Navbar";
 import React from "react";
-import SideBar from "./SideBar";
 import Input from "./Input";
+import Chats from "./Chats";
 const Chat = () => {
     return(
         <div className="chat">
             <Input/>
+            <Chats/>
         </div>
     );
 }
