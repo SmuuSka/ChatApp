@@ -6,7 +6,6 @@ const SideBar= () =>{
     return(
         <div className="sideBarChat">
             <Navbar/>
-            <Chats/>
             <Search/>
 
         </div>
