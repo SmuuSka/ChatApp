@@ -1,10 +1,12 @@
-import BGVIDEO from "../cssFiles/backgroundvid.mp4"
+import BGVIDEO from "../cssFiles/backgroundvid.mp4";
 import {useState} from "react";
-
 import loginService from '../services/loginService';
+
 const Login = () =>{
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   const usernameChange = (event) => {
     setUsername(event.target.value)
@@ -22,8 +24,10 @@ const Login = () =>{
     try {
       console.log(credentials)
       const response = await loginService.login(credentials)
-      console.log(response.data)
+      setUser(response)
+      window.localStorage.setItem('loggedUser', JSON.stringify(user))
     } catch (e) {
+      console.log('login failed wrong user name or password')
       console.log(e)
     }
   }
@@ -44,7 +48,7 @@ const Login = () =>{
           <form className="form-group" onSubmit={onLogin}>
             <input id = "loginUsername"  type="text" className="form-control" placeholder="Username/Display Name" onChange={usernameChange}/>
             <input id = "loginPassWord" type="password"  className="form-control" placeholder="Password" onChange={passwordChange}/>
-            <button  id = "buttonLogReg" type="button" className="btn btn-primary">Login</button>
+            <button  id = "buttonLogReg" type="submit" className="btn btn-primary">Login</button>
             <p>Dont have an account? Register</p>
           </form>
 

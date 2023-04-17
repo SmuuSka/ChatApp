@@ -46,7 +46,7 @@ const Register = () =>{
             <input id = "registerUsername" type="text" className="form-control" placeholder="Username/Display Name" onChange={usernameChange}/>
             <input id = "registerEmail" type="email" className="form-control" placeholder="Email"/>
             <input  id = "registerPassword" type="password"  className="form-control" placeholder="Password" onChange={passwordChange}/>
-            <input id = "registerFile" type="file" className="form-control-file" id="exampleFormControlFile1"/>
+            {/*<input id = "registerFile" type="file" className="form-control-file" id="exampleFormControlFile1"/>*/}
             <button id = "buttonLogReg" type="submit" className="btn btn-primary">Register</button>
           </form>
 

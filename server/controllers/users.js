@@ -6,7 +6,6 @@ const pool = require('../database');
 
 
 usersRouter.post('/', async (request, response) => {
-  console.log('lol');
   const {username, password} = request.body;
   if (password.length < 3) {
     return response.status(400).json({
