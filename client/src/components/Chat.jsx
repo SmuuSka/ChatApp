@@ -1,6 +1,7 @@
 import Input from "./Input";
 import Chats from "./Chats";
-import { useState } from "react";
+import React, { useState } from "react";
+import RoomCreate from "./RoomCreate";
 
 const Chat = ({socket}) => {
 
