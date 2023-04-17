@@ -32,7 +32,7 @@ const saveUser = async (username, password) => {
   try {
     conn = await pool.getConnection();
     const save = await conn.query(`
-    INSERT INTO testi (username, password) 
+    INSERT INTO users (username, password) 
     VALUES (?, ?)`, [username, password]);
     console.log(save);
     return save;
@@ -48,7 +48,7 @@ const getUsers = async () => {
   let conn;
   try {
     conn = await pool.getConnection();
-    const result = await conn.query(`SELECT username FROM testi`);
+    const result = await conn.query(`SELECT username FROM users`);
     return JSON.parse(JSON.stringify(result));
   } catch (err) {
     console.log(err);

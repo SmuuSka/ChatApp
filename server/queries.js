@@ -2,13 +2,13 @@
 const pool = require('./database');
 
 const createTable = `
-    CREATE TABLE IF NOT EXISTS testi ( 
-        id int AUTO_INCREMENT PRIMARY KEY,
+    CREATE TABLE IF NOT EXISTS users ( 
+        user_id int AUTO_INCREMENT PRIMARY KEY,
         username varchar(50) NOT NULL, 
-        password varchar(200) NOT NULL
+        password varchar(255) NOT NULL
     )`;
 
-const saveMessage = `INSERT INTO messages 
+const saveMessage = `INSERT INTO user_messages 
                     (content, roomID, from, time) 
                     VALUES (?, ?, ?, ?)`;
 

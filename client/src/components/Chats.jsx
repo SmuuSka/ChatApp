@@ -1,9 +1,11 @@
-import React from "react";
+
 import Message from "./Message";
-const Chats = () => {
+
+const Chats = ({messages}) => {
+
     return(
         <div className="chatBOX">
-            <Message/>
+            {messages.map(message => <Message message={message}/>)}
         </div>
     );
 }

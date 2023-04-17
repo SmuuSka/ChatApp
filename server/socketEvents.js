@@ -2,10 +2,10 @@ const eventHandler = (io) => {
   io.on('connection', (socket) => {
     console.log(`socket: käyttäjä liittyi`);
 
-    socket.on('message', (message, roomID) => {
-      socket.to(roomID).emit('message', message);
+    socket.on('message', (message) => {
+      socket.emit('message', message);
       console.log(socket.rooms);
-      console.log(`socket: new message ${message} to room ${roomID}`);
+      console.log(`socket: new message ${message}`);
     });
 
     socket.on('disconnect', () => {

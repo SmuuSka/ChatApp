@@ -42,7 +42,7 @@ const findUser = async (username) => {
     conn = await pool.getConnection();
     console.log(conn);
     const find = await conn.query(`
-    SELECT * FROM testi
+    SELECT * FROM users
     WHERE username=?`, [username]);
     return JSON.parse(JSON.stringify(find))[0];
   } catch (err) {
