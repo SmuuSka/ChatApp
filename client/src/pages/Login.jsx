@@ -9,7 +9,6 @@ const Login = ({navigate}) =>{
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
 
   const usernameChange = (event) => {
     setUsername(event.target.value)
@@ -27,9 +26,7 @@ const Login = ({navigate}) =>{
       const credentials = {username: username, password: password}
       console.log(credentials)
       const response = await loginService.login(credentials)
-      setUser(response.data)
-      window.localStorage.setItem('loggedUser', JSON.stringify(user))
-      console.log(user)
+      localStorage.setItem('chatUser', JSON.stringify(response.data))
       navigate('/pages/home');
 
     } catch (e) {

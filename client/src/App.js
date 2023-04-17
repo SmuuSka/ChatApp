@@ -4,6 +4,7 @@ import React from "react";
 import {Route, Routes, useNavigate} from "react-router-dom";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+
 function App() {
   const navigate = useNavigate();
   return (
