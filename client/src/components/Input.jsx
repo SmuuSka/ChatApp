@@ -1,10 +1,9 @@
 import React from "react";
 const Input = () => {
     return(
-        <div className="chatTextInput">
-        <input id = "inputSendChatText"/>
-            <button id = "emojiButton">E</button>
-            <button id = "gifButton">G</button>
+        <div class="input-field">
+            <input type="text" placeholder="Kirjoita viesti..."/>
+            <button type="submit">Lähetä</button>
         </div>
     );
 }

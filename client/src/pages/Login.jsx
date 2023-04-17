@@ -1,10 +1,11 @@
 import BGVIDEO from "../cssFiles/backgroundvid.mp4";
 import {useState} from "react";
 import React from "react";
-import {Route, Routes,Link,redirect} from 'react-router-dom';
+import {Route, Routes,Link} from 'react-router-dom';
 import loginService from '../services/loginService';
 import Register from "./Register";
-const Login = () =>{
+
+const Login = ({navigate}) =>{
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -22,12 +23,15 @@ const Login = () =>{
 
   const onLogin = async (event) => {
     event.preventDefault()
-    const credentials = {username: username, password: password}
     try {
+      const credentials = {username: username, password: password}
       console.log(credentials)
       const response = await loginService.login(credentials)
-      setUser(response)
+      setUser(response.data)
       window.localStorage.setItem('loggedUser', JSON.stringify(user))
+      console.log(user)
+      navigate('/pages/home');
+
     } catch (e) {
       console.log('login failed wrong user name or password')
       console.log(e)
@@ -49,7 +53,7 @@ const Login = () =>{
           <form className="form-group" onSubmit={onLogin}>
             <input id = "loginUsername"  type="text" className="form-control" placeholder="Username/Display Name" onChange={usernameChange}/>
             <input id = "loginPassWord" type="password"  className="form-control" placeholder="Password" onChange={passwordChange}/>
-              <button  id = "buttonLogReg" type="button" className="btn btn-primary" onSubmit={onLogin}>Login</button>
+            <button id = "buttonLogReg" type="submit" className="btn btn-primary">Login</button>
             <p>Dont have an account?<Link to="/pages/Register">Register</Link></p>
           </form>
         </div>
