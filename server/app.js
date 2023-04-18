@@ -5,13 +5,15 @@ const cors = require('cors');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login');
 const roomRouter = require('./controllers/rooms');
+const messageRouter = require('./controllers/messages');
 
 app.use(express.json());
 app.use(cors());
 
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
-app.use('/api/chat', roomRouter);
+app.use('/api/rooms', roomRouter);
+app.use('/api/messages', messageRouter);
 
 const queries = require('./queries');
 queries.createUserTable();
