@@ -28,6 +28,10 @@ const eventHandler = (io) => {
       console.log(`joined room ${roomID}`);
     });
 
+    socket.on('setUsername', (username) => {
+      socket.user = username;
+    });
+
     socket.on('leave-room', (roomID) => {
       socket.rooms.forEach((room) => {
         socket.leave(room);
