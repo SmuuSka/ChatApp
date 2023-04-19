@@ -1,11 +1,140 @@
+@media screen and (max-width: 600px) {
+    #registerBody,#loginBody{
+        width: 100%;
+        height: 100%;
+    }
+    #root{
+        max-height: 400px;
+    }
+    .container{
+        display: block;
+        justify-items: normal;
+        background-color: cadetblue;
+    }
+    .container-fluid{
+        width: 100%;
+    }
+    .sideBarChat{
+        display: grid;
+        background-color: darkgray;
+        align-items: end;
+        align-self: baseline;
+        justify-self: left;
+        height: 25%;
+        overflow: auto;
+        max-height: 300px;
+        margin-top: 30%;
+    }
+    .searchBar {
+        border-bottom: 1px solid black;
+        width: 100%;
+        margin-bottom: auto;
+    }
+    .chat{
+        height: 400px;
+        overflow-y: scroll;
+    }
+    .home{
+        background-color: cadetblue;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+    }
+    .input-field {
+        margin: 5px 0;
+        padding: 6px;
+    }
+    .chatBOX{
+        background-color: white;
+        margin-bottom: auto;
+        padding: 1%;
+        height: 67%;
+        border: #a9a9a991;
+        border-style: solid;
+        border-width: 13px;
+    }
+    .chatNavbar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        background-color: aliceblue;
+        height: 65px;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .container{
+        border: 1px solid black;
+        border-radius: 10px;
+        padding-left: 0;
+        padding-right: 0;
+        overflow: hidden;
+        display: flex;
+
+    }
+    .sideBarChat{
+        display: flex;
+        background-color: darkgray;
+        align-items: end;
+        overflow: auto;
+        flex-direction: column-reverse;
+    }
+    .searchBar{
+        border-bottom: 1px solid black;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+    .chat{
+        padding-right: 0;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+    .home{
+        background-color: cadetblue;
+        max-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+    }
+    .input-field {
+        margin: 5px 0;
+        padding: 6px;
+    }
+    .chatBOX{
+        background-color: white;
+        margin-bottom: auto;
+        height: 100%;
+    }
+    .chatNavbar{
+        display: flex;
+        align-items: center;
+        background-color: aliceblue;
+        height: 65px;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .container-fluid{
+        width: 80%;
+    }
+}
+
 .BGVIDEO{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-height: 50%;
-    min-width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     z-index: -1;
-    transform: translateX(-50%) translateY(-50%);
 }
 .formContainerReg{
 }
@@ -39,65 +168,22 @@
     border-width: 10px;
     display: flex;
     justify-content: center;
-    margin-top: 15%;
-}
-
-#root{
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 20px 30px 20px;
 }
 
 .RegLogoimg{
     max-width: 35%;
 }
 
-.container-fluid{
-    width: 80%;
-}
 .spanDiv{
     text-align: center;
     display: grid;
 
-}
-.home{
-    background-color: cadetblue;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.container{
-    border: 1px solid black;
-    border-radius: 10px;
-    padding-left: 0;
-    padding-right: 0;
-    width: 85%;
-    height: 90%;
-    overflow: hidden;
-    display: flex;
-}
-.sideBarChat{
-    display: flex;
-    width: 30%;
-    background-color: darkgray;
-    align-items: end;
-    overflow: hidden;
-    flex-direction: column-reverse;
-}
-
-.chat{
-    padding-right: 0;
-    width: 80%;
-    display: flex;
-    flex-direction: column-reverse;
-}
-
-.chatNavbar{
-    display: flex;
-    align-items: center;
-    background-color: aliceblue;
-    height: 65px;
-    justify-content: space-between;
-    width: 100%;
 }
 .chatMessageColumn{
     display: flex;
@@ -131,11 +217,6 @@ width: 100%;
     margin-right: auto;
     width: 100%;
 }
-.chatBOX{
-    background-color: white;
-    margin-bottom: auto;
-    height: 100%;
-}
 #chatMessageDate{
     margin: 3%;
 }
@@ -157,13 +238,6 @@ width: 100%;
 .buttonLogout{
     background-color: crimson;
     color: black;
-}
-
-.searchBar{
-    border-bottom: 1px solid black;
-    width: 100%;
-    margin-bottom: auto;
-    overflow: auto;
 }
 
 .searchInput{
@@ -262,15 +336,6 @@ padding: 10px;
     font-size: 12px;
     color: #999999;
     margin-top: 5px;
-  }
-
-
-  .input-field {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 5px 0;
-      padding: 6px;
   }
 
   #chatTextInput[type="text"] {

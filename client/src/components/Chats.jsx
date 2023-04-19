@@ -14,6 +14,7 @@ const Chats = ({messages, user}) => {
             <div className="chatBOX" ref={chatBoxRef}>
                 {/*<RoomCreate/>*/}
                 {messages.map(message => <Message key={messages.username} message={message}/>)}
+
             </div>
         );
     }

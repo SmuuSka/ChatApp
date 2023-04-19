@@ -26,22 +26,12 @@ const Chat = ({socket, user}) => {
         setRoom(roomID)
     })
 
-    const renderChat = () => {
-        if (room===null){
-            return (
-                <div className="chat">
-                    <JoinRoomPopup />
-                </div>
-            )
-        }
-        return (
-            <div className="chat">
-                <Input socket={socket} room={room} user={user}/>
-                <Chats messages={messages} user={user}/>
-            </div>
-        )
-    }
-    return renderChat()
+    return(
+        <div className="chat">
+            <Chats messages={messages}/>
+            <Input socket={socket} room={room}/>
+        </div>
+    );
 }
 
 export default Chat;
