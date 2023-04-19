@@ -27,8 +27,8 @@ const Chat = ({socket}) => {
 
     return(
         <div className="chat">
-            <Input socket={socket} room={room}/>
             <Chats messages={messages}/>
+            <Input socket={socket} room={room}/>
         </div>
     );
 }
