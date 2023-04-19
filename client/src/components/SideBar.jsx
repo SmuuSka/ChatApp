@@ -5,7 +5,7 @@ import chatService from "../services/chatService";
 import React, { useState, useEffect } from "react";
 
 
-const SideBar= ({socket}) =>{
+const SideBar= ({socket, user, navigate}) =>{
 
     const [roomName, setRoomName] = useState('')
     const onRoomNameChange = (event) =>  setRoomName(event.target.value)
@@ -23,7 +23,7 @@ const SideBar= ({socket}) =>{
 
     return(
         <div className="sideBarChat">      
-            <Navbar/>
+            <Navbar user={user} navigate={navigate}/>
             <Search socket={socket}/>
             <form onSubmit={onCreate}>
                 <input placeholder="room name" value={roomName} onChange={onRoomNameChange}/>

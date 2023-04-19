@@ -2,18 +2,17 @@ import React from "react";
 import { useState } from "react";
 import chatService from "../services/chatService";
 
-const Input = ({socket, room}) => {
+const Input = ({socket, room, user}) => {
 
     const [newMessage, setNewMessage] = useState('')
     const newMessageChange = (event) => setNewMessage(event.target.value)
-    const username = JSON.parse(localStorage.getItem("chatUser")).username
     console.log('time:' + new Date().toUTCString())
 
     const onMessage = async (e) => {
         e.preventDefault()
         console.log(newMessage)
-        const message = {roomID: room, content: newMessage, from: username, time: new Date().getTime()}
-        socket.emit('message', newMessage, username);
+        const message = {roomID: room, content: newMessage, from: user.username, time: new Date().getTime()}
+        socket.emit('message', newMessage, user.username);
         setNewMessage('')
         try {
             chatService.postMessage(message)

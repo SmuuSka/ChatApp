@@ -2,8 +2,9 @@ import Input from "./Input";
 import Chats from "./Chats";
 import React, { useState, useEffect } from "react";
 import chatService from "../services/chatService";
+import JoinRoomPopup from "./popoutForm";
 
-const Chat = ({socket}) => {
+const Chat = ({socket, user}) => {
 
     const [messages, setMessages] = useState([])
     const [room, setRoom] = useState(null)
@@ -25,12 +26,22 @@ const Chat = ({socket}) => {
         setRoom(roomID)
     })
 
-    return(
-        <div className="chat">
-            <Input socket={socket} room={room}/>
-            <Chats messages={messages}/>
-        </div>
-    );
+    const renderChat = () => {
+        if (room===null){
+            return (
+                <div className="chat">
+                    <JoinRoomPopup />
+                </div>
+            )
+        }
+        return (
+            <div className="chat">
+                <Input socket={socket} room={room} user={user}/>
+                <Chats messages={messages} user={user}/>
+            </div>
+        )
+    }
+    return renderChat()
 }
 
 export default Chat;

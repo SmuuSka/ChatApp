@@ -9,11 +9,15 @@ roomRouter.get('/', async (request, response) => {
 
 roomRouter.post('/', async (request, response) => {
   const name = request.body.name;
-  console.log(name);
+  if (name.length===0 || name.length > 20) {
+    return response.status(422).json({
+      'error': 'room name is either too long or too short.',
+    },
+    );
+  }
   const rooms = await queries.createRoom(name);
   return response.json(rooms);
 });
-
 
 module.exports = roomRouter;
 

@@ -28,7 +28,6 @@ const Login = ({navigate}) =>{
       const response = await loginService.login(credentials)
       localStorage.setItem('chatUser', JSON.stringify(response.data))
       navigate('/pages/home');
-
     } catch (e) {
       console.log('login failed wrong user name or password')
       console.log(e)

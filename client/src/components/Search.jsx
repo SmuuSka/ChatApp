@@ -11,8 +11,9 @@ const Search = ({socket}) => {
     useEffect(() => {
         chatService.getRooms().then(response => {
             setRoomResults(response)
+            console.log(roomResults)
         })
-    }, [roomResults])
+    }, [])
     
     return(
         <div className="searchBar">
@@ -21,7 +22,7 @@ const Search = ({socket}) => {
                 <input className="searchInput" type="text"  placeholder="Find a Room" onChange={onQueryChange} value={roomQuery}/>
                 
             </div>
-            {roomResults.filter(room => room.room_name.includes(roomQuery)).map(room => <Room room={room} socket={socket}/>)}
+            {roomResults.filter(room => room.room_name === roomQuery).map(room => <Room room={room} socket={socket}/>)}
         </div>
     );
 }

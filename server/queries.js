@@ -54,9 +54,7 @@ const searchRooms = async () => {
   let conn;
   try {
     conn = await pool.getConnection();
-    console.log('connection succeeded');
     const rooms = await conn.query(searchAllRooms);
-    console.log('search all rooms query succeeded');
     return JSON.parse(JSON.stringify(rooms));
   } catch (err) {
     console.log(err);
