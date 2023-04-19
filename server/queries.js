@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const pool = require('./database');
-
+const crypto = require('crypto');
 const createTable = `
     CREATE TABLE IF NOT EXISTS users ( 
         username varchar(50) PRIMARY KEY NOT NULL, 
@@ -12,6 +12,8 @@ const saveMessage = `INSERT INTO user_messages
                     VALUES (?, ?, ?)`;
 
 const searchAllRooms = `SELECT * FROM rooms`;
+
+const createQuery = `INSERT INTO rooms (room_id, room_name) VALUES (?,?)`;
 
 const searchAllMessages = `SELECT * FROM user_messages WHERE room_id = ?`;
 
@@ -64,6 +66,22 @@ const searchRooms = async () => {
   }
 };
 
+const createRoom = async (roomName) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.log('connection succeeded');
+    const id = crypto.randomBytes(20).toString('hex');
+    await conn.query(createQuery, [id, roomName]);
+    console.log('create room query succeeded');
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
 const searchMessages = async (roomID) => {
   let conn;
   try {
@@ -81,4 +99,4 @@ const searchMessages = async (roomID) => {
   }
 };
 
-module.exports = {createUserTable, sendMessage, searchRooms, searchMessages};
+module.exports = {createUserTable, sendMessage, searchRooms, searchMessages, createRoom};

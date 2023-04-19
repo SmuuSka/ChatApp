@@ -7,6 +7,13 @@ roomRouter.get('/', async (request, response) => {
   return response.json(rooms);
 });
 
+roomRouter.post('/', async (request, response) => {
+  const name = request.body.name;
+  console.log(name);
+  const rooms = await queries.createRoom(name);
+  return response.json(rooms);
+});
+
 
 module.exports = roomRouter;
 
