@@ -18,7 +18,7 @@ const Search = ({socket}) => {
     return(
         <div className="searchBar">
             <div className="searchForm">
-                <h3 id="searchbarTitle">Search for Rooms</h3>
+                <p id="searchbarTitle">Search for Rooms</p>
                 <input className="searchInput" type="text"  placeholder="Find a Room" onChange={onQueryChange} value={roomQuery}/>
                 
             </div>

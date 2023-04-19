@@ -2,9 +2,9 @@ import Input from "./Input";
 import Chats from "./Chats";
 import React, { useState, useEffect } from "react";
 import chatService from "../services/chatService";
-import JoinRoomPopup from "./popoutForm";
+import JoinRoomPopup from "./popoutButtons";
 
-const Chat = ({socket, user}) => {
+const Chat = ({socket}) => {
 
     const [messages, setMessages] = useState([])
     const [room, setRoom] = useState(null)

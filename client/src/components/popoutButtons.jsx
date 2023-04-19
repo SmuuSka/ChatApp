@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function RoomPopup({ onJoin, mode }) {
+const RoomPopup = ({ onJoin, mode }) => {
   const [roomName, setRoomName] = useState('');
   const [password, setPassword] = useState('');
 
@@ -10,7 +10,7 @@ function RoomPopup({ onJoin, mode }) {
 
   return (
     <div className="popup">
-      {mode === 'join' ? <h2>Join</h2> : <h2>Create</h2>}
+      <h2>{mode}</h2>
       <label>
         Room Name:
         <input type="text" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
@@ -19,12 +19,12 @@ function RoomPopup({ onJoin, mode }) {
         Password:
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </label>
-      <button onClick={handleJoin}>Join</button>
+      <button onClick={handleJoin}>{mode}</button>
     </div>
   );
 }
 
-const JoinRoomButton = () => {
+const RoomButton = () => {
   const [show, setShow] = useState(false);
 
   const handleJoin = (roomName, password) => {
@@ -37,11 +37,10 @@ const JoinRoomButton = () => {
   return (
     <div className='join-create-buttons'>
       <button className="join-room-button" onClick={() => setShow('join')}>Join Room</button>
-      <h3>or</h3>
       <button className="join-room-button" onClick={() => setShow('create')}>Create Room</button>
       {show && <RoomPopup onJoin={handleJoin} mode={show}/>}
     </div>
   );
 }
 
-export default JoinRoomButton;
+export default RoomButton;

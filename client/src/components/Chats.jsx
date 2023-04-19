@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import Message from "./Message";
 import RoomCreate from "./RoomCreate";
 
-const Chats = ({messages, user}) => {
+const Chats = ({messages}) => {
     const chatBoxRef = useRef(null);
     useEffect(() => {
         setTimeout(() => {
