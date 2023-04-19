@@ -8,7 +8,12 @@ const roomRouter = require('./controllers/rooms');
 const messageRouter = require('./controllers/messages');
 
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: '*',
+};
+
+
+app.use(cors(corsOptions));
 
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
