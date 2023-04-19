@@ -37,8 +37,16 @@ services:
     restart: always
     volumes:
       - "./setup.sql:/docker-entrypoint-initdb.d/setup.sql"
-    env_file:
-      - ./server/.env
+#    env_file:
+#      - ./server/.env
+    environment:
+      - MARIADB_ROOT_HOST=10.114.34.7
+      - MARIADB_PORT=3306
+      - MARIADB_DATABASE=chat_app
+      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWD}
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_PASSWORD=${DB_USER_PASSWD}
+
     ports:
       - "3306:3306"
 
