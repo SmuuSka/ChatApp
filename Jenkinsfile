@@ -22,6 +22,11 @@ pipeline {
                 sh 'docker system prune -a --volumes -f'
                 }
           }
+          stage("List env vars"){
+			steps{
+				sh "printenv | sort"
+			}
+		  }
           stage('Build Stage') {
             environment { 
                 MARIADB_ROOT_PASSWORD = credentials('DB_ROOT_PASSWD')
