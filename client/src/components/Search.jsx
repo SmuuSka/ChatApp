@@ -12,14 +12,14 @@ const Search = ({socket}) => {
         chatService.getRooms().then(response => {
             setRoomResults(response)
         })
-    }, [])
+    }, [roomResults])
     
     return(
         <div className="searchBar">
             <div className="searchForm">
                 <h3 id="searchbarTitle">Search for Rooms</h3>
                 <input className="searchInput" type="text"  placeholder="Find a Room" onChange={onQueryChange} value={roomQuery}/>
-                <button id = "createRoomButton">Create a Room</button>
+                
             </div>
             {roomResults.filter(room => room.room_name.includes(roomQuery)).map(room => <Room room={room} socket={socket}/>)}
         </div>

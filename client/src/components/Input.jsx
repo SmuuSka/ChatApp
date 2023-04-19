@@ -7,12 +7,12 @@ const Input = ({socket, room}) => {
     const [newMessage, setNewMessage] = useState('')
     const newMessageChange = (event) => setNewMessage(event.target.value)
     const username = JSON.parse(localStorage.getItem("chatUser")).username
-
+    console.log('time:' + new Date().toUTCString())
 
     const onMessage = async (e) => {
         e.preventDefault()
         console.log(newMessage)
-        const message = {roomID: room, content: newMessage, from: username}
+        const message = {roomID: room, content: newMessage, from: username, time: new Date().getTime()}
         socket.emit('message', newMessage, username);
         setNewMessage('')
         try {

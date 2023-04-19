@@ -1,6 +1,6 @@
 import axios from 'axios';
-const url = 'http://localhost:3003/api/'
-
+const url = 'http://10.114.34.7:3003/api/'
+//const url = 'http://localhost:3003/api/'
 let token = null;
 
 const setToken = token => {
@@ -25,4 +25,9 @@ const postMessage = async (message) => {
     return response
 }
 
-export default {getRooms, getMessages, postMessage, setToken}
+const createRoom = async (roomName) => {
+    const response = await axios.post(url+'rooms', {name: roomName});
+    return response
+}
+
+export default {getRooms, getMessages, postMessage, setToken, createRoom}
