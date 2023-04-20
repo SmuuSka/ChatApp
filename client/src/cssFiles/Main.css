@@ -14,22 +14,21 @@ body {
     .container{
         display: block;
         justify-items: normal;
-        background-color: #888C81;
-        min-height: 700px;
+        background: linear-gradient(to right, #F2E7DC,#F2B279);
+        border-radius: 5px;
+        margin-top: 14%;
     }
     .container-fluid{
         width: 100%;
+        background: linear-gradient(to right, #F2913D, #FF5252);
     }
     .sideBarChat{
         display: grid;
-        background-color: darkgray;
         align-items: end;
         align-self: baseline;
         justify-self: left;
         height: 25%;
-        overflow: auto;
         max-height: 300px;
-        margin-top: 30%;
     }
     .searchBar {
         border-bottom: 1px solid black;
@@ -37,29 +36,33 @@ body {
         margin-bottom: auto;
     }
     .chat{
-        height: 400px;
         overflow-y: scroll;
+        height: 80vh;
     }
     .home{
-        background-color: #888C81;
         display: flex;
         flex-direction: column;
         align-items: center;
         border-radius: 10px;
+        margin-top: 10%;
     }
     .input-field {
         margin: 5px 0;
         padding: 6px;
         background-color: #888C81;
+        border-radius: 5px;
     }
     .chatBOX{
-        background-color: #F2EFEB;
-        margin-bottom: auto;
         padding: 1%;
-        height: 67%;
-        border: #a9a9a991;
-        border-style: solid;
-        border-width: 13px;
+        height: 100%;
+        margin-bottom: auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-height: 80%;
+        position: relative;
     }
     .chatNavbar{
         position: fixed;
@@ -68,10 +71,26 @@ body {
         right: 0;
         display: flex;
         align-items: center;
-        background-color: aliceblue;
+        background: linear-gradient(to right, #F2B279, #F2E7DC);
         height: 65px;
         justify-content: space-between;
         width: 100%;
+    }
+    .navbar.navbar-8,.navbar-toggler-icon {
+        background-image: url('https://mdbootstrap.com/img/svg/hamburger1.svg?color=F25C05');
+        background-size: cover;
+    }
+    .navbar-toggler{
+        width: 10%;
+        margin-left: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 8%;
+    }
+    .popup {
+        width: 90%;
+        max-width: none;
+        z-index: 2;
     }
 }
 
@@ -83,12 +102,13 @@ body {
         padding-right: 0;
         overflow: hidden;
         display: flex;
-        min-height: 750px;
-
+        min-height: 90vh;
+        background-color: #F2E7DC;
+        box-shadow: 0px 0px 50px #F2913D;
     }
     .sideBarChat{
         display: flex;
-        background-color: #888C81;
+        background-color: #F2E7DC;
         align-items: end;
         overflow: auto;
         flex-direction: column-reverse;
@@ -104,36 +124,71 @@ body {
         width: 80%;
         display: flex;
         flex-direction: column;
+        margin: 0.5%;
     }
     .home{
-        background-color: #888C81;
         max-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         border-radius: 10px;
-        margin-top: 1%;
+        margin-top: 2%;
+        margin-bottom: 2%;
     }
     .input-field {
         margin: 5px 0;
         padding: 6px;
-        background-color: #888C81;
+        background: linear-gradient(to bottom, #F2E7DC, #F27405);
+        border-radius: 5px;
     }
+
     .chatBOX{
-        background-color: white;
         margin-bottom: auto;
         height: 100%;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
     }
     .chatNavbar{
         display: flex;
         align-items: center;
-        background-color: aliceblue;
+        background: linear-gradient(to bottom, #F2913D, #F2913D);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
         height: 65px;
         justify-content: space-between;
         width: 100%;
     }
     .container-fluid{
         width: 80%;
+        background-image: url("https://images.pexels.com/photos/7130497/pexels-photo-7130497.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .join-room-button {
+        display: inline-block;
+        margin: 2%;
+        padding: 1%;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #FFF;
+        background: linear-gradient(to bottom, #F25C05, #F27405);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        justify-content: space-between;
+    }
+    .join-room-button:hover {
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+    }
+    .popup {
+        width: 90%;
+        max-width: none;
+        z-index: 2;
     }
 }
 
@@ -269,7 +324,6 @@ width: 100%;
     display: grid;
 }
 #searchbarTitle{
-    background-color: #888C81;
     text-align: center;
     overflow: hidden;
     border-radius: 5px;
@@ -393,16 +447,16 @@ padding: 10px;
     max-width: 90%;
     width: 400px;
   }
-  
+
   .popup h2 {
     margin-top: 0;
   }
-  
+
   .popup label {
     display: block;
     margin-bottom: 10px;
   }
-  
+
   .popup input[type="text"],
   .popup input[type="password"] {
     width: 100%;
@@ -411,7 +465,7 @@ padding: 10px;
     border-radius: 5px;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
   }
-  
+
   .popup button {
     display: block;
     width: 100%;
@@ -423,42 +477,23 @@ padding: 10px;
     border-radius: 5px;
     cursor: pointer;
   }
-  
-  @media screen and (max-width: 600px) {
-    .popup {
-      width: 90%;
-      max-width: none;
-    }
-  }
-  .join-room-button {
-    display: block;
-    margin: 2%;
-    padding: 1%;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #3D403A;
-    background-color: #F2EFEB;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+
   @media screen and (max-width: 600px) {
     .join-room-button {
       font-size: 16px;
       padding: 8px 16px;
     }
   }
-  
+
 .join-create-buttons {
     display: flex;
     justify-content: center;
     margin: 1%;
-} 
+    width: 100%;
+}
 
 .join-create-buttons h3 {
     display: inline;
-}  
-  
-  
-  
+}
+
+
