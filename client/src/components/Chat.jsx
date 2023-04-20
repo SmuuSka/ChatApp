@@ -3,7 +3,7 @@ import Chats from "./Chats";
 import React, { useState, useEffect } from "react";
 import chatService from "../services/chatService";
 
-const Chat = ({socket}) => {
+const Chat = ({socket, user}) => {
 
     const [messages, setMessages] = useState([])
     const [room, setRoom] = useState(null)

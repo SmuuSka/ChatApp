@@ -11,7 +11,7 @@ function App() {
       <Routes>
           <Route exact path="/" element={<Login navigate={navigate}/>}/>
           <Route path="/pages/Register" element={<Register navigate={navigate}/>}/>
-          <Route path="/pages/Home" element={<Home />}/>
+          <Route path="/pages/Home" element={<Home navigate={navigate}/>}/>
       </Routes>
 
   );

@@ -11,17 +11,18 @@ const Search = ({socket}) => {
     useEffect(() => {
         chatService.getRooms().then(response => {
             setRoomResults(response)
+            console.log(roomResults)
         })
-    }, [roomResults])
+    }, [])
     
     return(
         <div className="searchBar">
             <div className="searchForm">
-                <h3 id="searchbarTitle">Search for Rooms</h3>
+                <h4 id="searchbarTitle">Recent rooms</h4>
                 <input className="searchInput" type="text"  placeholder="Find a Room" onChange={onQueryChange} value={roomQuery}/>
                 
             </div>
-            {roomResults.filter(room => room.room_name.includes(roomQuery)).map(room => <Room room={room} socket={socket}/>)}
+            {roomResults.filter(room => room.room_name === roomQuery).map(room => <Room room={room} socket={socket}/>)}
         </div>
     );
 }

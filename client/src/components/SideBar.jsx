@@ -1,11 +1,10 @@
 import Navbar from "./Navbar";
 import Search from "./Search";
-import Chats from "./Chats";
 import chatService from "../services/chatService";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
+import RoomButton from "./popoutButtons";
 
-
-const SideBar= ({socket}) =>{
+const SideBar= ({socket, user, navigate}) =>{
 
     const [roomName, setRoomName] = useState('')
     const onRoomNameChange = (event) =>  setRoomName(event.target.value)
@@ -22,13 +21,10 @@ const SideBar= ({socket}) =>{
     }
 
     return(
-        <div className="sideBarChat">      
-            <Navbar/>
-            <Search socket={socket}/>
-            <form onSubmit={onCreate}>
-                <input placeholder="room name" value={roomName} onChange={onRoomNameChange}/>
-                <button id = "createRoomButton">Create a Room</button>
-            </form>
+        <div className="sideBarChat">
+            <Navbar user={user} navigate={navigate}/>
+            <Search socket={socket} user={user}/>
+            <RoomButton />      
         </div>
     );
 }
