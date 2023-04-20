@@ -20,7 +20,7 @@ const Home = ({navigate}) => {
           setUser(user)
           console.log(user)
           chatService.setToken(user.token)
-          socketio.emit();
+          socketio.emit('setUsername', user);
         }
     }, [])
 
@@ -29,7 +29,7 @@ const Home = ({navigate}) => {
             <div className="container">
             <SideBar socket={socketio} user={user} navigate={navigate}/>
                 <Chat socket={socketio} user={user}/>
-                {user === null && <UsernamePopup/>}
+                {user === null && <UsernamePopup />}
             </div>
 
         </div>

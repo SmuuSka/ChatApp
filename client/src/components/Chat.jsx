@@ -22,6 +22,7 @@ const Chat = ({socket, user}) => {
     })
 
     socket.on('join-room', roomID => {
+        console.log('id ' + roomID)
         setRoom(roomID)
     })
 

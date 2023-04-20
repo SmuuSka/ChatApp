@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import chatService from '../services/chatService';
 
-const RoomPopup = ({ onJoin, mode }) => {
+const RoomPopup = ({ onJoin, onCreate, mode }) => {
   const [roomName, setRoomName] = useState('');
   const [password, setPassword] = useState('');
 
   const handleJoin = () => {
     onJoin(roomName, password);
   };
+
+  const handleCreate = () => {
+    onCreate(roomName, password)
+  }
 
   return (
     <div className="popup">
@@ -19,26 +24,38 @@ const RoomPopup = ({ onJoin, mode }) => {
         Password:
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </label>
-      <button onClick={handleJoin}>{mode}</button>
+      {
+      mode === 'join' ? 
+      <button onClick={handleJoin}>{mode}</button> : 
+      <button onClick={handleCreate}>{mode}</button>
+      }
     </div>
   );
 }
 
-const RoomButton = () => {
+const RoomButton = ({socket}) => {
   const [show, setShow] = useState(false);
 
   const handleJoin = (roomName, password) => {
-    // Do something with roomName and password, e.g. join a chat room
     console.log(`Joining room "${roomName}" with password "${password}"`);
-    // Close the popup
+    socket.emit('join-room-button', roomName, password)
     setShow(false);
   };
+
+  const handleCreate = async (roomName, password) => {
+    try {
+      await chatService.createRoom(roomName, password)
+      setShow(false)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <div className='join-create-buttons'>
       <button className="join-room-button" onClick={() => setShow('join')}>Join Room</button>
       <button className="join-room-button" onClick={() => setShow('create')}>Create Room</button>
-      {show && <RoomPopup onJoin={handleJoin} mode={show}/>}
+      {show && <RoomPopup onJoin={handleJoin} onCreate={handleCreate} mode={show}/>}
     </div>
   );
 }

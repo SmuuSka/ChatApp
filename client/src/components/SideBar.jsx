@@ -24,7 +24,7 @@ const SideBar= ({socket, user, navigate}) =>{
         <div className="sideBarChat">
             <Navbar user={user} navigate={navigate}/>
             <Search socket={socket} user={user}/>
-            <RoomButton />      
+            <RoomButton socket={socket}/>      
         </div>
     );
 }
