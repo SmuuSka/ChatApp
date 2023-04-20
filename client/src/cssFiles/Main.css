@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
+
+body {
+    font-family: 'Source Sans Pro', bold;
+}
 @media screen and (max-width: 600px) {
     #registerBody,#loginBody{
         width: 100%;
@@ -9,7 +14,7 @@
     .container{
         display: block;
         justify-items: normal;
-        background-color: cadetblue;
+        background-color: #888C81;
         min-height: 700px;
     }
     .container-fluid{
@@ -36,7 +41,7 @@
         overflow-y: scroll;
     }
     .home{
-        background-color: cadetblue;
+        background-color: #888C81;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -45,9 +50,10 @@
     .input-field {
         margin: 5px 0;
         padding: 6px;
+        background-color: #888C81;
     }
     .chatBOX{
-        background-color: white;
+        background-color: #F2EFEB;
         margin-bottom: auto;
         padding: 1%;
         height: 67%;
@@ -82,7 +88,7 @@
     }
     .sideBarChat{
         display: flex;
-        background-color: darkgray;
+        background-color: #888C81;
         align-items: end;
         overflow: auto;
         flex-direction: column-reverse;
@@ -100,7 +106,7 @@
         flex-direction: column;
     }
     .home{
-        background-color: cadetblue;
+        background-color: #888C81;
         max-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -111,6 +117,7 @@
     .input-field {
         margin: 5px 0;
         padding: 6px;
+        background-color: #888C81;
     }
     .chatBOX{
         background-color: white;
@@ -262,11 +269,11 @@ width: 100%;
     display: grid;
 }
 #searchbarTitle{
-    background-color: aquamarine;
+    background-color: #888C81;
     text-align: center;
     overflow: hidden;
     border-radius: 5px;
-    margin-bottom: auto;
+    margin-bottom: 5%;
 }
 #searchFriendImage{
     width: 70px;
@@ -353,7 +360,7 @@ padding: 10px;
   #chatSendMessageButton[type="submit"] {
     margin-left: 10px;
     padding: 1% 2%;
-    background-color: #4CAF50;
+    background-color: #0D0D0D;
     color: white;
     border: none;
     font-size: 16px;
@@ -429,8 +436,8 @@ padding: 10px;
     padding: 1%;
     font-size: 1rem;
     font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
+    color: #3D403A;
+    background-color: #F2EFEB;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -445,7 +452,8 @@ padding: 10px;
   
 .join-create-buttons {
     display: flex;
-    margin: 5%;
+    justify-content: center;
+    margin: 1%;
 } 
 
 .join-create-buttons h3 {

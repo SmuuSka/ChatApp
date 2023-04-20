@@ -1,8 +1,9 @@
 const Room = ({room, socket}) => {
 
     const onJoin = (name) => {
+        const user = JSON.parse(localStorage.getItem('chatUser')).username
         console.log(`sending emit to room named ${name}!!`)
-        socket.emit("join-room", name)
+        socket.emit("join-room", name, user)
     }
 
     return (

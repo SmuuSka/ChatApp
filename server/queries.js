@@ -8,14 +8,16 @@ const createTable = `
     )`;
 
 const saveMessage = `INSERT INTO user_messages 
-                    (username, room_id, message_content) 
-                    VALUES (?, ?, ?)`;
+                    (username, room_id, message_content, created_at) 
+                    VALUES (?, ?, ?, ?)`;
 
 const searchAllRooms = `SELECT * FROM rooms`;
 
 const createQuery = `INSERT INTO rooms (room_id, room_name) VALUES (?,?)`;
 
 const searchAllMessages = `SELECT * FROM user_messages WHERE room_id = ?`;
+
+const userRoomQuery = `INSERT INTO user_rooms (room_id, username) VALUES (?, ?)`;
 
 const createUserTable = async () => {
   let conn;
@@ -39,7 +41,8 @@ const sendMessage = async (message) => {
   try {
     conn = await pool.getConnection();
     console.log('connection succeeded');
-    const values = [message.from, message.roomID, message.content];
+    console.log(message.time);
+    const values = [message.from, message.roomID, message.content, message.time];
     await conn.query(saveMessage, values);
     console.log('save message query succeeded');
   } catch (err) {
@@ -48,7 +51,6 @@ const sendMessage = async (message) => {
     if (conn) await conn.end();
   }
 };
-
 
 const searchRooms = async () => {
   let conn;
@@ -97,4 +99,26 @@ const searchMessages = async (roomID) => {
   }
 };
 
-module.exports = {createUserTable, sendMessage, searchRooms, searchMessages, createRoom};
+const setUserRooms = async (roomID, username) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.log('connection succeeded');
+    await conn.query(userRoomQuery, [roomID, username]);
+    console.log('added room to user');
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
+module.exports = {
+  createUserTable,
+  sendMessage,
+  searchRooms,
+  searchMessages,
+  createRoom,
+  setUserRooms,
+};
