@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable comma-dangle */
-const queries = require('./queries');
+const findRoom = require('./queries').findRoom;
 
 const eventHandler = (io) => {
   io.on('connection', (socket) => {
@@ -9,7 +9,7 @@ const eventHandler = (io) => {
     socket.on('message', (message) => {
       const currentRoom = socket.currentRoom;
       const {content, from, time} = message;
-      socket.to(currentRoom).emit('message', {message_content: content, username: from, time: time});
+      socket.to(currentRoom).emit('message', {message_content: content, username: from, created_at: time});
       console.log({message_content: content, username: from, time: time});
       console.log(socket.rooms);
       console.log(`
@@ -21,7 +21,7 @@ const eventHandler = (io) => {
       console.log('socket: käyttäjä poistui.');
     });
 
-    socket.on('join-room', (roomID, user) => {
+    socket.on('join-room', (roomID) => {
       socket.currentRoom = roomID;
       socket.rooms.forEach((room) => {
         socket.leave(room);
@@ -29,17 +29,33 @@ const eventHandler = (io) => {
       socket.join(roomID);
       socket.emit('join-room', roomID);
       console.log(`joined room ${roomID}`);
-      queries.setUserRooms(roomID, user);
     });
 
-    socket.on('setUsername', (username) => {
-      socket.user = username;
+    socket.on('join-room-button', async (name, password) => {
+      // TODO: testaa salasanaa
+      try {
+        const room = (await findRoom(name, password))[0];
+        console.log(room);
+        const id = room.room_id;
+        console.log(id);
+        socket.rooms.forEach((room) => {
+          socket.leave(room);
+        });
+        socket.currentRoom = id;
+        socket.join(id);
+        socket.emit('join-room', id);
+        console.log(`joined room id: ${id} name: ${name}`);
+      } catch (e) {
+        console.log('room not found');
+        console.log(e);
+      }
     });
 
     socket.on('leave-room', (roomID) => {
       socket.rooms.forEach((room) => {
         socket.leave(room);
       });
+      socket.emit('leave-room', roomID);
     });
   });
 };

@@ -12,6 +12,7 @@ const Input = ({socket, room}) => {
         e.preventDefault()
         console.log(newMessage)
         const message = {roomID: room, content: newMessage, from: user.username, time: new Date().toLocaleString('sv-SE')}
+        console.log(message)
         socket.emit('message', message);
         setNewMessage('')
         try {
