@@ -182,4 +182,5 @@ module.exports = {
   createRoom,
   findUserRooms,
   findRoom,
+  findUser
 };
