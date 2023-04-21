@@ -9,7 +9,7 @@ const eventHandler = (io) => {
     socket.on('message', (message) => {
       const currentRoom = socket.currentRoom;
       const {content, from, time} = message;
-      socket.to(currentRoom).emit('message', {message_content: content, username: from, time: time});
+      socket.to(currentRoom).emit('message', {message_content: content, username: from, created_at: time});
       console.log({message_content: content, username: from, time: time});
       console.log(socket.rooms);
       console.log(`
@@ -55,6 +55,7 @@ const eventHandler = (io) => {
       socket.rooms.forEach((room) => {
         socket.leave(room);
       });
+      socket.emit('leave-room', roomID);
     });
   });
 };

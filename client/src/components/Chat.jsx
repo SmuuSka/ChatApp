@@ -2,6 +2,7 @@ import Input from "./Input";
 import Chats from "./Chats";
 import React, { useState, useEffect } from "react";
 import chatService from "../services/chatService";
+import ExitRoomButton from "./ExitRoomButton";
 
 const Chat = ({socket, user}) => {
 
@@ -26,9 +27,15 @@ const Chat = ({socket, user}) => {
         setRoom(roomID)
     })
 
+    socket.on('leave-room', () => {
+        console.log('lol')
+        setMessages([])
+        setRoom(null)
+    })
+
     return(
         <div className="chat">
-            <Chats messages={messages}/>
+            <Chats messages={messages} socket={socket}/>
             <Input socket={socket} room={room}/>
         </div>
     );

@@ -28,9 +28,14 @@ roomRouter.post('/', async (request, response) => {
     },
     );
   }
-
-  const rooms = await queries.createRoom(name, password);
-  return response.json(rooms);
+  try {
+    const rooms = await queries.createRoom(name, password);
+    return response.json(rooms);
+  } catch (e) {
+    return response.status(422).json({
+      'error': 'room name already exists',
+    });
+  }
 });
 
 module.exports = roomRouter;

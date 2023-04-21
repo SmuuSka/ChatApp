@@ -4,10 +4,11 @@ import getUser from "../services/getUser";
 import Room from "./resultRoom";
 
 const Search = ({socket}) => {
+
     const [roomQuery, setRoomQuery] = useState('')
     const [roomResults, setRoomResults] = useState([]);
+    const [currentRoom, setCurrentRoom] = useState(0);
     const user = getUser()
-    console.log(user)
     const onQueryChange = (event) => setRoomQuery(event.target.value);
 
     useEffect(() => {
@@ -24,6 +25,15 @@ const Search = ({socket}) => {
             })
         }
     }, [])
+
+    socket.on('join-room', room_id => {
+        setCurrentRoom(room_id);
+        console.log('c '+currentRoom)
+    })
+
+    socket.on('leave-room', () => {
+        setCurrentRoom(0)
+    })
     
     return(
         <div className="searchBar">
@@ -31,7 +41,9 @@ const Search = ({socket}) => {
                 <h4 id="searchbarTitle">Recent rooms</h4>
                 <input className="searchInput" type="text"  placeholder="Find a Room" onChange={onQueryChange} value={roomQuery}/>
             </div>
-            {roomResults.filter(room => room.room_name.includes(roomQuery)).map(room => <Room room={room} socket={socket}/>)}
+            {roomResults.filter(room => room.room_name
+            .includes(roomQuery))
+            .map(room => <Room room={room} socket={socket} currentRoom={currentRoom}/>)}
         </div>
     );
 }

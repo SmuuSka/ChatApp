@@ -3,6 +3,8 @@ import Search from "./Search";
 import chatService from "../services/chatService";
 import React, {useState,useEffect} from "react";
 import RoomButton from "./popoutButtons";
+import OverlayMenu from "./overlayMenu";
+import ExitRoomButton from "./ExitRoomButton";
 
 const SideBar= ({socket, user, navigate}) =>{
 
@@ -27,6 +29,7 @@ const SideBar= ({socket, user, navigate}) =>{
             console.log('created room');
         } catch (e) {
             console.log('pieleen meni');
+            alert('huoneen nimi on jo varattu')
             console.log(e)
         }
     }
@@ -34,22 +37,14 @@ const SideBar= ({socket, user, navigate}) =>{
     return(
         <div className="sideBarChat">
             <Navbar user={user} navigate={navigate} />
-            {isSmallScreen && (
-                <>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
-                            aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent15">
-                        <Search socket={socket} user={user} />
-                        <RoomButton />
-                    </div>
-                </>
-            )}
+            {isSmallScreen && <OverlayMenu socket={socket} user={user} />}
             {!isSmallScreen && (
                 <>
+                   
                     <Search socket={socket} user={user} />
                     <RoomButton socket={socket}/>
+                    <h4 className="sideTitle">Join Or Create</h4>
+                    
                 </>
             )}
         </div>

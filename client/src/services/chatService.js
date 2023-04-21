@@ -33,8 +33,6 @@ const postMessage = async (message) => {
 }
 
 const createRoom = async (roomName, password) => {
-    console.log('n,p')
-    console.log(roomName, password)
     const response = await axios.post(url+'rooms', {name: roomName, password: password});
     return response
 }
