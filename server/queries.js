@@ -17,6 +17,7 @@ const searchAllRooms = `SELECT * FROM rooms`;
 const createQuery = `INSERT INTO rooms (room_id, room_name, password) VALUES (?,?,?)`;
 
 const searchAllMessages = `SELECT * FROM user_messages WHERE room_id = ?`;
+const searchRoomQuery = `SELECT * FROM rooms WHERE room_name = ?`;
 
 const userRoomsQuery = `SELECT DISTINCT user_messages.room_id, rooms.room_name 
                         FROM user_messages, rooms 
@@ -51,6 +52,7 @@ const sendMessage = async (message) => {
     const values = [message.from, message.roomID, message.content, message.time];
     await conn.query(saveMessage, values);
     console.log('save message query succeeded');
+    return message
   } catch (err) {
     console.log(err);
   } finally {
@@ -72,6 +74,22 @@ const searchRooms = async () => {
   }
 };
 
+const searchRoom = async (roomName) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.log('connection succeeded');
+    const room = await conn.query(searchRoomQ, [roomName]);
+    console.log('search room query succeeded');
+    return JSON.parse(JSON.stringify(room));
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
 const createRoom = async (roomName, password) => {
   let conn;
   try {
@@ -80,6 +98,7 @@ const createRoom = async (roomName, password) => {
     const id = crypto.randomBytes(20).toString('hex');
     await conn.query(createQuery, [id, roomName, password]);
     console.log('create room query succeeded');
+    return roomName
   } catch (err) {
     console.log(err);
     throw err;
@@ -97,6 +116,23 @@ const searchMessages = async (roomID) => {
     console.log('search all messages query succeeded');
     console.log(JSON.parse(JSON.stringify(messages)));
     return JSON.parse(JSON.stringify(messages));
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
+const findUser = async (username) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.log(conn);
+    const find = await conn.query(`
+    SELECT * FROM users
+    WHERE username=?`, [username]);
+    return JSON.parse(JSON.stringify(find))[0];
   } catch (err) {
     console.log(err);
     throw err;
@@ -141,8 +177,10 @@ module.exports = {
   createUserTable,
   sendMessage,
   searchRooms,
+  searchRoom,
   searchMessages,
   createRoom,
   findUserRooms,
   findRoom,
+  findUser
 };
