@@ -48,7 +48,7 @@ const Register = ({navigate}) =>{
           <form className="form-group" onSubmit={onRegisterSubmit}>
             <input id = "registerUsername" type="text" className="form-control" placeholder="Username/Display Name" onChange={usernameChange}/>
             <input id = "registerEmail" type="email" className="form-control" placeholder="Email"/>
-            {/*<input  id = "registerPassword" type="password"  className="form-control" placeholder="Password" onChange={passwordChange}/>*/}
+            {<input  id = "registerPassword" type="password"  className="form-control" placeholder="Password" onChange={passwordChange}/>}
             <input id = "registerFile" type="file" className="form-control-file" id="exampleFormControlFile1"/>
               <button id = "buttonLogReg" type="submit" className="btn btn-primary">Register</button>
             <p>Already have an account?<Link to="/">Login</Link></p>

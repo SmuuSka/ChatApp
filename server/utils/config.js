@@ -9,7 +9,4 @@ const sql = {
   database: process.env.DB_NAME,
   port: process.env.DB_PORT,
 };
-
-console.log(sql);
-
 module.exports = {sql, PORT};

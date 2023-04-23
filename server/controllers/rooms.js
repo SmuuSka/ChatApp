@@ -30,7 +30,7 @@ roomRouter.post('/', async (request, response) => {
   }
   try {
     const rooms = await queries.createRoom(name, password);
-    return response.json(rooms);
+    return response.status(200).json(rooms);
   } catch (e) {
     return response.status(422).json({
       'error': 'room name already exists',
