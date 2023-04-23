@@ -40,7 +40,7 @@ services:
 #    env_file:
 #      - ./server/.env
     environment:
-      - MARIADB_ROOT_HOST=10.114.34.7
+      - MARIADB_ROOT_HOST=192.168.117.128
       - MARIADB_PORT=3306
       - MARIADB_DATABASE=chat_app
       - MARIADB_ROOT_PASSWORD=${DB_ROOT}
