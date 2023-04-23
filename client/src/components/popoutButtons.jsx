@@ -21,7 +21,7 @@ const RoomPopup = ({ onJoin, onCreate, mode, onClose }) => {
 
   return (
     <div className="popup">
-      <button className="exit-button" onClick={handleClose}>
+      <button id = "exitButtoncreateRoom" className="exit-button" onClick={handleClose}>
         <FontAwesomeIcon icon={faTimes} />
       </button>
       <h2>{mode}</h2>
@@ -34,9 +34,9 @@ const RoomPopup = ({ onJoin, onCreate, mode, onClose }) => {
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
       </label>
       {
-      mode === 'join' ? 
-      <button onClick={handleJoin}>{mode}</button> : 
-      <button onClick={handleCreate}>{mode}</button>
+      mode === 'join' ?
+      <button  id = "buttoncreateRoom" onClick={handleJoin}>{mode}</button> :
+      <button  id = "buttoncreateRoom" onClick={handleCreate}>{mode}</button>
       }
     </div>
   );
