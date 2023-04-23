@@ -25,9 +25,11 @@ const Input = ({socket, room}) => {
 
     return(
         <div class="input-field">
-            <form onSubmit={onMessage}>
+            <form  onSubmit={onMessage}>
+                <div id="chatInputBox">
                 <input  className="chatTextInput" type="text" placeholder="Kirjoita viesti..." onChange={newMessageChange} value={newMessage}/>
-                <button id = "chatSendMessageButton"type="submit">Lähetä</button>
+                <button  id = "chatSendMessageButton"type="submit"><img id = "chatSendMessageButtonImg" src="https://cdn.pixabay.com/photo/2014/06/15/22/29/message-369540_960_720.png"/></button>
+                </div>
             </form>
         </div>
     );

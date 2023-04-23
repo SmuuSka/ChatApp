@@ -26,7 +26,7 @@ const OverlayMenu = ({socket, user}) => {
   return (
     <>
       <Navbar bg="light" variant="light">
-        <Button variant="outline-dark" onClick={handleToggle}>
+        <Button  id="bootStrapBurgerButton"variant="outline-dark" onClick={handleToggle}>
           <FontAwesomeIcon icon={faBars} />
         </Button>
       </Navbar>
@@ -36,7 +36,7 @@ const OverlayMenu = ({socket, user}) => {
         ref={menuRef}
       >
         <div className="overlay-menu-content" onClick={handleContentClick}>
-          <Button className="exit-button" variant="link" onClick={handleExitClick}>
+          <Button id="exitButtoncreateRoom" className="exit-button" variant="link" onClick={handleExitClick}>
             <FontAwesomeIcon icon={faTimes} />
           </Button>
             <RoomButton socket={socket}/>
