@@ -28,7 +28,7 @@ pipeline {
                 MARIADB_USER_PASSWORD = credentials('DB_USER_PASS')
             }
             steps {
-                sh "docker compose build --build-arg MARIADB_ROOT_PASSWORD='$MARIADB_ROOT_PASSWORD' --build-arg MARIADB_USER='$MARIADB_USER' --build-arg MARIADB_PASSWORD='$MARIADB_USER_PASSWORD'"
+                sh "docker compose build --build-arg MARIADB_ROOT_PASSWORD='$MARIADB_ROOT_PASSWORD' --build-arg MARIADB_USER='$MARIADB_USER' --build-arg MARIADB_USER_PASSWORD='$MARIADB_USER_PASSWORD'"
                 sh "docker compose up -d"
                 sh "docker compose ps"
             }
