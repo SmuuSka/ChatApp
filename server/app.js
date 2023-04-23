@@ -23,8 +23,9 @@ app.use('/api/messages', messageRouter);
 const queries = require('./queries');
 queries.createUserTable();
 
+
 app.get('/', (request, response) => {
-  return response.send('<h1>morjesta pöytään</h1>');
+  return response.send({ name: "samu" });
 });
 
 module.exports = app;

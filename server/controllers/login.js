@@ -3,12 +3,13 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const loginRouter = require('express').Router();
 const pool = require('../database');
+const findUser = require('../queries').findUser
 
 loginRouter.post('/', async (request, response) => {
   const {username, password} = request.body;
 
   const user = await findUser(username);
-  console.log('user is' + user);
+  console.log('user is ' + user.username);
 
   const passwordCorrect = user === undefined ?
     false :
@@ -32,25 +33,10 @@ loginRouter.post('/', async (request, response) => {
 
   response
       .status(200)
-      .send({token, username: user.username, name: user.name});
+      .send({token, username: user.username});
 });
 
 
-const findUser = async (username) => {
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    console.log(conn);
-    const find = await conn.query(`
-    SELECT * FROM users
-    WHERE username=?`, [username]);
-    return JSON.parse(JSON.stringify(find))[0];
-  } catch (err) {
-    console.log(err);
-    throw err;
-  } finally {
-    if (conn) await conn.end();
-  }
-};
+
 
 module.exports = loginRouter;

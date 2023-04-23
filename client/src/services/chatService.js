@@ -1,6 +1,7 @@
+/* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios';
-const url = 'http://10.114.34.7:3003/api/'
-//const url = 'http://localhost:3003/api/'
+//const url = 'http://10.114.34.7:3003/api/'
+const url = 'http://localhost:3003/api/'
 let token = null;
 
 const setToken = token => {
@@ -10,6 +11,12 @@ const setToken = token => {
 
 const getRooms = async () => {
     const response = await axios.get(url+'rooms');
+    return response.data;
+}
+
+
+const getRecentRooms = async (username) => {
+    const response = await axios.get(url+'rooms/'+username);
     return response.data;
 }
 
@@ -25,9 +32,9 @@ const postMessage = async (message) => {
     return response
 }
 
-const createRoom = async (roomName) => {
-    const response = await axios.post(url+'rooms', {name: roomName});
+const createRoom = async (roomName, password) => {
+    const response = await axios.post(url+'rooms', {name: roomName, password: password});
     return response
 }
 
-export default {getRooms, getMessages, postMessage, setToken, createRoom}
+export default {getRooms, getMessages, postMessage, setToken, createRoom, getRecentRooms}

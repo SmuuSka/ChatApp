@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 const pool = require('./database');
 const crypto = require('crypto');
+
 const createTable = `
     CREATE TABLE IF NOT EXISTS users ( 
         username varchar(50) PRIMARY KEY NOT NULL, 
@@ -8,14 +9,22 @@ const createTable = `
     )`;
 
 const saveMessage = `INSERT INTO user_messages 
-                    (username, room_id, message_content) 
-                    VALUES (?, ?, ?)`;
+                    (username, room_id, message_content, created_at) 
+                    VALUES (?, ?, ?, ?)`;
 
 const searchAllRooms = `SELECT * FROM rooms`;
 
-const createQuery = `INSERT INTO rooms (room_id, room_name) VALUES (?,?)`;
+const createQuery = `INSERT INTO rooms (room_id, room_name, password) VALUES (?,?,?)`;
 
 const searchAllMessages = `SELECT * FROM user_messages WHERE room_id = ?`;
+const searchRoomQuery = `SELECT * FROM rooms WHERE room_name = ?`;
+
+const userRoomsQuery = `SELECT DISTINCT user_messages.room_id, rooms.room_name 
+                        FROM user_messages, rooms 
+                        WHERE user_messages.username = ? 
+                        AND user_messages.room_id = rooms.room_id`;
+
+const findRoomQuery = `SELECT * FROM rooms WHERE room_name = ? AND password = ?`;
 
 const createUserTable = async () => {
   let conn;
@@ -39,9 +48,11 @@ const sendMessage = async (message) => {
   try {
     conn = await pool.getConnection();
     console.log('connection succeeded');
-    const values = [message.from, message.roomID, message.content];
+    console.log(message.time);
+    const values = [message.from, message.roomID, message.content, message.time];
     await conn.query(saveMessage, values);
     console.log('save message query succeeded');
+    return message
   } catch (err) {
     console.log(err);
   } finally {
@@ -49,14 +60,11 @@ const sendMessage = async (message) => {
   }
 };
 
-
 const searchRooms = async () => {
   let conn;
   try {
     conn = await pool.getConnection();
-    console.log('connection succeeded');
     const rooms = await conn.query(searchAllRooms);
-    console.log('search all rooms query succeeded');
     return JSON.parse(JSON.stringify(rooms));
   } catch (err) {
     console.log(err);
@@ -66,14 +74,31 @@ const searchRooms = async () => {
   }
 };
 
-const createRoom = async (roomName) => {
+const searchRoom = async (roomName) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.log('connection succeeded');
+    const room = await conn.query(searchRoomQ, [roomName]);
+    console.log('search room query succeeded');
+    return JSON.parse(JSON.stringify(room));
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
+const createRoom = async (roomName, password) => {
   let conn;
   try {
     conn = await pool.getConnection();
     console.log('connection succeeded');
     const id = crypto.randomBytes(20).toString('hex');
-    await conn.query(createQuery, [id, roomName]);
+    await conn.query(createQuery, [id, roomName, password]);
     console.log('create room query succeeded');
+    return roomName
   } catch (err) {
     console.log(err);
     throw err;
@@ -99,4 +124,63 @@ const searchMessages = async (roomID) => {
   }
 };
 
-module.exports = {createUserTable, sendMessage, searchRooms, searchMessages, createRoom};
+const findUser = async (username) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.log(conn);
+    const find = await conn.query(`
+    SELECT * FROM users
+    WHERE username=?`, [username]);
+    return JSON.parse(JSON.stringify(find))[0];
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
+const findUserRooms = async (username) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.log('connection succeeded');
+    const rooms = await conn.query(userRoomsQuery, [username]);
+    console.log('found all users rooms');
+    return JSON.parse(JSON.stringify(rooms));
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
+const findRoom = async (username, password) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.log('connection succeeded');
+    const rooms = await conn.query(findRoomQuery, [username, password]);
+    console.log('found room with password');
+    return JSON.parse(JSON.stringify(rooms));
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
+module.exports = {
+  createUserTable,
+  sendMessage,
+  searchRooms,
+  searchRoom,
+  searchMessages,
+  createRoom,
+  findUserRooms,
+  findRoom,
+  findUser
+};
