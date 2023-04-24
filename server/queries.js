@@ -17,7 +17,10 @@ const searchAllRooms = `SELECT * FROM rooms`;
 const createQuery = `INSERT INTO rooms (room_id, room_name, password) VALUES (?,?,?)`;
 
 const searchAllMessages = `SELECT * FROM user_messages WHERE room_id = ?`;
+
 const searchRoomQuery = `SELECT * FROM rooms WHERE room_name = ?`;
+
+const deleteRoomQuery = `SELECT * FROM rooms WHERE room_id = ?`;
 
 const userRoomsQuery = `SELECT DISTINCT user_messages.room_id, rooms.room_name 
                         FROM user_messages, rooms 
@@ -25,6 +28,8 @@ const userRoomsQuery = `SELECT DISTINCT user_messages.room_id, rooms.room_name
                         AND user_messages.room_id = rooms.room_id`;
 
 const findRoomQuery = `SELECT * FROM rooms WHERE room_name = ? AND password = ?`;
+
+
 
 const createUserTable = async () => {
   let conn;

@@ -24,12 +24,17 @@ const Home = ({navigate}) => {
         }
     }, [])
 
+    if (user === null) {
+        return (
+            <UsernamePopup setUser={setUser}/>
+        )
+    }
+
     return(
         <div className="home" >
             <div className="container">
             <SideBar socket={socketio} user={user} navigate={navigate}/>
                 <Chat socket={socketio} user={user}/>
-                {user === null && <UsernamePopup />}
             </div>
 
         </div>

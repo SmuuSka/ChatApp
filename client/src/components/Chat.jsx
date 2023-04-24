@@ -18,6 +18,7 @@ const Chat = ({socket, user}) => {
         .catch(e => console.log('user has not joined a room or error ocurred'))
     }, [room])
 
+
     socket.on('message', message => {
         setMessages(messages.concat(message))
     })
