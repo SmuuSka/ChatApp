@@ -1,25 +1,27 @@
 import { useState } from "react";
 
-const UsernamePopup = () => {
+const UsernamePopup = ({user,setUser }) => {
 
     const [tempUsername, setTempUsername] = useState(null)
     const [entered, setEntered] = useState(false);
     
     const setUsername = () => {
-        localStorage.setItem('chatUser', JSON.stringify({username: tempUsername, token: 1}))
-        setEntered(tempUsername.length > 0)
+        const user = {username: tempUsername, token: 1}
+        localStorage.setItem('chatUser', JSON.stringify(user))
+        setEntered(tempUsername != null)
+        setUser(user)
     }
 
 
     if (!entered){
         return (
             <div className="popup">
-              <h2>enter your temporary username</h2>
+              <h2>enter temporary username to enter</h2>
               <label>
                 username:
                 <input type="text" value={tempUsername} onChange={(e) => setTempUsername(e.target.value)} />
               </label>
-              <button onClick={setUsername}>enter</button>
+              <button onClick={() => setUsername()}>enter</button>
             </div>
         );
     }

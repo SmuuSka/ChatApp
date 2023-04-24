@@ -8,27 +8,29 @@ const Search = ({socket}) => {
     const [roomQuery, setRoomQuery] = useState('')
     const [roomResults, setRoomResults] = useState([]);
     const [currentRoom, setCurrentRoom] = useState(0);
+    const [messaged, setMessaged] = useState(false);
     const user = getUser()
     const onQueryChange = (event) => setRoomQuery(event.target.value);
 
     useEffect(() => {
-        if (user === undefined) {
+        if (user.token === 1) {
             chatService.getRooms().then(response => {
                 setRoomResults(response)
-                console.log(roomResults)
             })
         } else {
             chatService.getRecentRooms(user.username).then(response => {
                 setRoomResults(response)
-                console.log('resp')
-                console.log(roomResults)
             })
         }
-    }, [])
+    }, [messaged])
 
     socket.on('join-room', room_id => {
         setCurrentRoom(room_id);
         console.log('c '+currentRoom)
+    })
+
+    socket.on('message', message => {
+        setMessaged(true)
     })
 
     socket.on('leave-room', () => {

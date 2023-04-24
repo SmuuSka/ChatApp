@@ -1,5 +1,4 @@
 const Room = ({room, socket, currentRoom}) => {
-    console.log(currentRoom)
 
     const onJoin = (name) => {
         const user = JSON.parse(localStorage.getItem('chatUser')).username

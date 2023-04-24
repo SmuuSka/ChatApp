@@ -3,13 +3,12 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const loginRouter = require('express').Router();
 const pool = require('../database');
-const findUser = require('../queries').findUser
+const findUser = require('../queries').findUser;
 
 loginRouter.post('/', async (request, response) => {
   const {username, password} = request.body;
 
   const user = await findUser(username);
-  console.log('user is ' + user.username);
 
   const passwordCorrect = user === undefined ?
     false :
@@ -35,8 +34,5 @@ loginRouter.post('/', async (request, response) => {
       .status(200)
       .send({token, username: user.username});
 });
-
-
-
 
 module.exports = loginRouter;

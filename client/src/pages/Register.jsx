@@ -25,7 +25,7 @@ const Register = ({navigate}) =>{
     try {
       const response = await registerService.register(credentials);
       console.log(response)
-      redirect("/pages/Login")
+      navigate("/")
     } catch (e) {
       console.log(e)
     }

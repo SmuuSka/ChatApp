@@ -20,6 +20,7 @@ const SideBar= ({socket, user, navigate}) =>{
         handleResize(); // initial check
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+    
     const onRoomNameChange = (event) =>  setRoomName(event.target.value)
 
     const onCreate = async (event) => {
