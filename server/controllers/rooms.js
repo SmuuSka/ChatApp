@@ -14,7 +14,7 @@ roomRouter.get('/:username', async (request, response) => {
 });
 
 roomRouter.delete('/:id', async (request, response) => {
-  const id = request.params.id; 
+  const id = request.params.id;
 });
 
 roomRouter.post('/', async (request, response) => {
@@ -24,7 +24,7 @@ roomRouter.post('/', async (request, response) => {
       'error': 'room name is either too long or too short. max length is 20',
     },
     );
-}
+  }
 
   if (password.length === 0 || password.length > 255) {
     return response.status(422).json({

@@ -13,7 +13,7 @@ const Search = ({socket}) => {
     const onQueryChange = (event) => setRoomQuery(event.target.value);
 
     useEffect(() => {
-        if (user === undefined) {
+        if (user.token === 1) {
             chatService.getRooms().then(response => {
                 setRoomResults(response)
             })

@@ -1,5 +1,4 @@
 const Message = ({message}) => {
-    console.log(message)
     return(
         <div class="message">
             <div class="message-avatar">

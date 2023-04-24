@@ -51,7 +51,8 @@ const Login = ({navigate}) =>{
             <input id = "loginPassWord" type="password"  className="form-control" placeholder="Password" onChange={passwordChange}/>
             <button id = "buttonLogReg" type="submit" className="btn btn-primary">Login</button>
             <p>Dont have an account? <Link to="/pages/Register">Register</Link></p>
-            <p>Or <Link to="/pages/home" >continue</Link> as a guest</p>
+            or <Link to="/pages/home" >continue</Link> as a guest
+           
           </form>
         </div>
       </div>);

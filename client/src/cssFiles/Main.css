@@ -667,3 +667,8 @@ width: 100%;
   .exit-button:hover {
     color: #f44336;
   }
+
+  .continue {
+    margin: 0;
+    padding: 0;
+  }
