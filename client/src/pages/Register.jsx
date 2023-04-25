@@ -1,7 +1,7 @@
 import BGVIDEO from "../cssFiles/backgroundvid.mp4"
 import React, {useState} from "react";
 import registerService from '../services/registerService';
-import {Link, redirect, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Register = ({navigate}) =>{
 
@@ -25,7 +25,7 @@ const Register = ({navigate}) =>{
     try {
       const response = await registerService.register(credentials);
       console.log(response)
-      redirect("/pages/Login")
+      navigate("/")
     } catch (e) {
       console.log(e)
     }

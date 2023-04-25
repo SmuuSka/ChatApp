@@ -10,13 +10,15 @@ const setToken = token => {
 
 
 const getRooms = async () => {
-    const response = await axios.get(url+'rooms');
+    console.log('key')
+    console.log(process.env.REACT_APP_API_KEY)
+    const response = await axios.get(url+'rooms/room/'+process.env.REACT_APP_API_KEY);
     return response.data;
 }
 
 
 const getRecentRooms = async (username) => {
-    const response = await axios.get(url+'rooms/'+username);
+    const response = await axios.get(url+'rooms/user/'+username+'/'+process.env.REACT_APP_API_KEY);
     return response.data;
 }
 
@@ -36,5 +38,17 @@ const createRoom = async (roomName, password) => {
     const response = await axios.post(url+'rooms', {name: roomName, password: password});
     return response
 }
+const getPublicRooms = async () => {
+    const response = await axios.get(url+'rooms/public/'+process.env.REACT_APP_API_KEY);
+    return response.data;
+}
 
-export default {getRooms, getMessages, postMessage, setToken, createRoom, getRecentRooms}
+export default {
+    getRooms, 
+    getMessages, 
+    postMessage, 
+    setToken, 
+    createRoom, 
+    getRecentRooms, 
+    getPublicRooms
+}

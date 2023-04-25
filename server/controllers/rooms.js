@@ -1,16 +1,36 @@
 /* eslint-disable new-cap */
 const roomRouter = require('express').Router();
 const queries = require('../queries');
+require('dotenv').config();
 
-roomRouter.get('/', async (request, response) => {
-  const rooms = await queries.searchRooms();
-  return response.json(rooms);
+roomRouter.get('/room/:key', async (request, response) => {
+  if (request.params.key === process.env.API_KEY) {
+    const rooms = await queries.searchRooms();
+    return response.status(200).json(rooms);
+  }
+  return response.status(401).json({'error': 'wrong api key'});
 });
 
 // hakee huoneet joissa käyttäjä on viestitellyt
-roomRouter.get('/:username', async (request, response) => {
-  const rooms = await queries.findUserRooms(request.params.username);
-  return response.json(rooms);
+roomRouter.get('/user/:username/:key', async (request, response) => {
+  if (request.params.key === process.env.API_KEY) {
+    const rooms = await queries.findUserRooms(request.params.username);
+    return response.json(rooms);
+  }
+  return response.status(401).json({'error': 'wrong api key'});
+});
+
+// hakee julkiset huoneet, eli huoneet joilla ei ole salasanaa.
+roomRouter.get('/public/:key', async (request, response) => {
+  if (request.params.key === process.env.API_KEY) {
+    const rooms = await queries.findAllPublicRooms();
+    return response.json(rooms);
+  }
+  return response.status(401).json({'error': 'wrong api key'});
+});
+
+roomRouter.delete('/:id', async (request, response) => {
+  const id = request.params.id;
 });
 
 roomRouter.post('/', async (request, response) => {
@@ -22,11 +42,13 @@ roomRouter.post('/', async (request, response) => {
     );
   }
 
-  if (password.length === 0 || password.length > 255) {
-    return response.status(422).json({
-      'error': 'password is either too long or too short. max length is 255',
-    },
-    );
+  if (password) {
+    if (password.length > 255) {
+      return response.status(422).json({
+        'error': 'password is too long. max length is 255',
+      },
+      );
+    }
   }
   try {
     const rooms = await queries.createRoom(name, password);

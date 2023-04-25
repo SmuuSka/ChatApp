@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 const pool = require('./database');
 const crypto = require('crypto');
@@ -17,7 +18,14 @@ const searchAllRooms = `SELECT * FROM rooms`;
 const createQuery = `INSERT INTO rooms (room_id, room_name, password) VALUES (?,?,?)`;
 
 const searchAllMessages = `SELECT * FROM user_messages WHERE room_id = ?`;
+
 const searchRoomQuery = `SELECT * FROM rooms WHERE room_name = ?`;
+
+const deleteRoomQuery = `SELECT * FROM rooms WHERE room_id = ?`;
+
+const findPublicRoom = `SELECT * FROM rooms WHERE room_name = ? AND password IS NULL`;
+
+const findPublicRooms = `SELECT * FROM rooms WHERE password IS NULL`;
 
 const userRoomsQuery = `SELECT DISTINCT user_messages.room_id, rooms.room_name 
                         FROM user_messages, rooms 
@@ -25,6 +33,9 @@ const userRoomsQuery = `SELECT DISTINCT user_messages.room_id, rooms.room_name
                         AND user_messages.room_id = rooms.room_id`;
 
 const findRoomQuery = `SELECT * FROM rooms WHERE room_name = ? AND password = ?`;
+
+const createWihtoutPassword = `INSERT INTO rooms (room_id, room_name) VALUES (?,?)`;
+
 
 const createUserTable = async () => {
   let conn;
@@ -49,10 +60,12 @@ const sendMessage = async (message) => {
     conn = await pool.getConnection();
     console.log('connection succeeded');
     console.log(message.time);
+    await conn.query('SET FOREIGN_KEY_CHECKS=0');
     const values = [message.from, message.roomID, message.content, message.time];
     await conn.query(saveMessage, values);
+    await conn.query('SET FOREIGN_KEY_CHECKS=1');
     console.log('save message query succeeded');
-    return message
+    return message;
   } catch (err) {
     console.log(err);
   } finally {
@@ -65,6 +78,20 @@ const searchRooms = async () => {
   try {
     conn = await pool.getConnection();
     const rooms = await conn.query(searchAllRooms);
+    return JSON.parse(JSON.stringify(rooms));
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
+const findAllPublicRooms = async () => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const rooms = await conn.query(findPublicRooms);
     return JSON.parse(JSON.stringify(rooms));
   } catch (err) {
     console.log(err);
@@ -96,9 +123,14 @@ const createRoom = async (roomName, password) => {
     conn = await pool.getConnection();
     console.log('connection succeeded');
     const id = crypto.randomBytes(20).toString('hex');
-    await conn.query(createQuery, [id, roomName, password]);
-    console.log('create room query succeeded');
-    return roomName
+    if (!password) {
+      await conn.query(createWihtoutPassword, [id, roomName]);
+      console.log('created without pass');
+    } else {
+      await conn.query(createQuery, [id, roomName, password]);
+      console.log('create room query succeeded');
+    }
+    return roomName;
   } catch (err) {
     console.log(err);
     throw err;
@@ -157,13 +189,19 @@ const findUserRooms = async (username) => {
   }
 };
 
-const findRoom = async (username, password) => {
+const findRoom = async (name, password) => {
   let conn;
+  let rooms;
   try {
     conn = await pool.getConnection();
     console.log('connection succeeded');
-    const rooms = await conn.query(findRoomQuery, [username, password]);
-    console.log('found room with password');
+    if (password === null) {
+      rooms = await conn.query(findPublicRoom, [name]);
+      console.log(`found room named ${name} with no password`);
+    } else {
+      rooms = await conn.query(findRoomQuery, [name, password]);
+      console.log('found room with password');
+    }
     return JSON.parse(JSON.stringify(rooms));
   } catch (err) {
     console.log(err);
@@ -182,5 +220,6 @@ module.exports = {
   createRoom,
   findUserRooms,
   findRoom,
-  findUser
+  findUser,
+  findAllPublicRooms,
 };

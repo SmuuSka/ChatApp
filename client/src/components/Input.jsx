@@ -9,6 +9,9 @@ const Input = ({socket, room}) => {
     const user = JSON.parse(localStorage.getItem('chatUser'))
 
     const onMessage = async (e) => {
+        if (room === null){
+            return alert('you need to be in room to send a message')
+        }
         e.preventDefault()
         console.log(newMessage)
         const message = {roomID: room, content: newMessage, from: user.username, time: new Date().toLocaleString('sv-SE')}

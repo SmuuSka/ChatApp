@@ -12,30 +12,31 @@ const Chat = ({socket, user}) => {
     useEffect(() => {
         chatService.getMessages(room)
         .then(response => {
-            console.log(response.data)
             setMessages(response)
         })
-        .catch(e => console.log('user has not joined a room or error ocurred'))
+        .catch(e => console.log(e))
     }, [room])
+
 
     socket.on('message', message => {
         setMessages(messages.concat(message))
     })
 
+
     socket.on('join-room', roomID => {
         console.log('id ' + roomID)
         setRoom(roomID)
+        socket.emit('get-clients', roomID)
     })
 
     socket.on('leave-room', () => {
-        console.log('lol')
         setMessages([])
         setRoom(null)
     })
 
     return(
         <div className="chat">
-            <Chats messages={messages} socket={socket}/>
+            <Chats messages={messages} socket={socket} room={room}/>
             <Input socket={socket} room={room}/>
         </div>
     );
