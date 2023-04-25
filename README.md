@@ -1,5 +1,3 @@
-Totta, pahoitteluni epätarkasta kuvauksesta. Tässä uusi tarkempi kuvaus REST API:n tarjoamista reiteistä:
-
 # REST API:n kuvaus
 
 ## Kirjautuminen
