@@ -3,10 +3,10 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 
 const sql = {
-  host: process.env.MARIADB_ROOT_HOST,
-  user: 'root',
-  password: process.env.MARIADB_ROOT_PASSWORD,
-  database: process.env.MARIADB_DATABASE,
-  port: process.env.MARIADB_PORT,
+  host: 'localhost-placeholder',
+  user: 'user-placeholder',
+  password: 'password-placeholder',
+  database: 'chat_app',
+  port: '3306',
 };
 module.exports = {sql, PORT};
