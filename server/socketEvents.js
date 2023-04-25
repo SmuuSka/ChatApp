@@ -8,6 +8,7 @@ const eventHandler = (io) => {
 
     socket.on('message', (message) => {
       const currentRoom = socket.currentRoom;
+      console.log('um ' + socket.username);
       const {content, from, time} = message;
       socket.to(currentRoom).emit('message', {message_content: content, username: from, created_at: time});
       console.log({message_content: content, username: from, time: time});
@@ -31,20 +32,16 @@ const eventHandler = (io) => {
       socket.emit('join-room', roomID);
       console.log(`joined room ${roomID}`);
       socket.username = username;
-      const sockets = io.sockets.adapter.rooms.get(roomID);
-      const socketIds = [...sockets];
-      const usernames = socketIds.map((socketId) => {
-        const socketObj = io.sockets.sockets.get(socketId);
-        return socketObj ? socketObj.username : null;
-      });
+      const usernames = getUsernames(io, roomID);
+      socket.username = setUsername(usernames, socket.username);
       console.log('usernames');
       console.log(usernames);
       socket.emit('get-clients', usernames.filter((name) => name !== null));
     });
 
     socket.on('join-room-button', async (name, password, user) => {
-      // TODO: testaa salasanaa
       try {
+        console.log('pass '+password);
         const room = (await findRoom(name, password))[0];
         console.log(room);
         const id = room.room_id;
@@ -54,7 +51,7 @@ const eventHandler = (io) => {
         });
         socket.currentRoom = id;
         socket.join(id);
-        socket.emit('join-room', id);
+        socket.emit('join-room', id, user);
       } catch (e) {
         console.log('room not found');
         console.log(e);
@@ -68,6 +65,25 @@ const eventHandler = (io) => {
       socket.emit('leave-room', roomID);
     });
   });
+};
+
+const setUsername = (usernames, username) => {
+  const nameCount = usernames.filter((name) => name === username).length;
+  console.log(nameCount);
+  if (nameCount> 1) {
+    return `${username} (${nameCount})`;
+  }
+  return username;
+};
+
+const getUsernames = (io, id) => {
+  const sockets = io.sockets.adapter.rooms.get(id);
+  const socketIds = [...sockets];
+  const usernames = socketIds.map((socketId) => {
+    const socketObj = io.sockets.sockets.get(socketId);
+    return socketObj ? socketObj.username : null;
+  });
+  return usernames;
 };
 
 module.exports = eventHandler;

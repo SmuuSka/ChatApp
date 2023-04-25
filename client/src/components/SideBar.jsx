@@ -43,7 +43,7 @@ const SideBar= ({socket, user, navigate}) =>{
                 <>
                    
                     <Search socket={socket} user={user} />
-                    <RoomButton socket={socket}/>
+                    <RoomButton socket={socket} user={user}/>
                     <h4 className="sideTitle">Join Or Create</h4>
                     
                 </>

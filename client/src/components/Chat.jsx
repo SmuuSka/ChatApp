@@ -30,7 +30,6 @@ const Chat = ({socket, user}) => {
     })
 
     socket.on('leave-room', () => {
-        console.log('lol')
         setMessages([])
         setRoom(null)
     })
