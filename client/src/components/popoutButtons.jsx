@@ -31,7 +31,7 @@ const RoomPopup = ({ onJoin, onCreate, mode, onClose }) => {
       </label>
       <label>
         Password:
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="password" placeholder="leave blank to join/create room with no password"value={password} onChange={(e) => setPassword(e.target.value)} />
       </label>
       {
       mode === 'join' ?
@@ -42,20 +42,22 @@ const RoomPopup = ({ onJoin, onCreate, mode, onClose }) => {
   );
 }
 
-const RoomButton = ({socket}) => {
+const RoomButton = ({socket, user}) => {
   const [show, setShow] = useState(false);
 
   const handleJoin = (roomName, password) => {
-    console.log(`Joining room "${roomName}" with password "${password}"`);
-    socket.emit('join-room-button', roomName, password)
+    const pass = password === '' ? null : password
+    console.log(`Joining room "${roomName}" with password "${pass}"`);
+    socket.emit('join-room-button', roomName, pass, user.username)
     setShow(false);
   };
 
   const handleCreate = async (roomName, password) => {
     try {
-      await chatService.createRoom(roomName, password)
+      const pass = password === '' ? null : password
+      await chatService.createRoom(roomName, pass)
       setShow(false)
-      socket.emit('join-room-button', roomName, password)
+      socket.emit('join-room-button', roomName, pass, user.username)
     } catch (e) {
       alert('Room name is already taken')
       console.log(e)
