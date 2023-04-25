@@ -2,7 +2,6 @@ const mariadb = require('mariadb');
 const config = require('./utils/config');
 
 const pool = mariadb.createPool(config.sql);
-
 // eslint-disable-next-line require-jsdoc
 // async function createUserTable() {
 //   let conn;
