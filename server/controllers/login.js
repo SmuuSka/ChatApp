@@ -1,10 +1,20 @@
+/* eslint-disable max-len */
 /* eslint-disable new-cap */
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const loginRouter = require('express').Router();
-const pool = require('../database');
 const findUser = require('../queries').findUser;
 
+/**
+ * Tarkistaa käyttäjän antamat kirjautumistiedot ja luo tarvittaessa uuden JWT-tokenin.
+ * @function
+ * @async
+ * @param {object} request - HTTP-pyyntöobjekti, joka sisältää käyttäjän antamat kirjautumistiedot.
+ * @param {object} response - HTTP-vastausobjekti.
+ * @returns {object} - HTTP-vastausobjekti, joka sisältää JWT-tokenin ja käyttäjänimen, jos kirjautuminen onnistui.
+ *
+ * @throws {object} - HTTP-virheobjekti, jos käyttäjänimi tai salasana on virheellinen.
+ */
 loginRouter.post('/', async (request, response) => {
   const {username, password} = request.body;
 
@@ -16,7 +26,7 @@ loginRouter.post('/', async (request, response) => {
 
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
-      error: 'invalid username or password',
+      error: 'Virheellinen käyttäjänimi tai salasana',
     });
   }
 
@@ -30,7 +40,7 @@ loginRouter.post('/', async (request, response) => {
       {expiresIn: 2*60*60},
   );
 
-  response
+  return response
       .status(200)
       .send({token, username: user.username});
 });

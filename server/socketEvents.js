@@ -8,14 +8,11 @@ const eventHandler = (io) => {
 
     socket.on('message', (message) => {
       const currentRoom = socket.currentRoom;
-      console.log('um ' + socket.username);
       const {content, from, time} = message;
-      socket.to(currentRoom).emit('message', {message_content: content, username: from, created_at: time});
-      console.log({message_content: content, username: from, time: time});
-      console.log(socket.rooms);
-      console.log(`
-        socket: new message ${message} from user: ${from} in ${currentRoom}`
-      );
+      if (content !== '' && content.length < 255) {
+        socket.to(currentRoom).emit('message', {message_content: content, username: from, created_at: time});
+      }
+      console.log(`socket: new message ${message} from user: ${from} in ${currentRoom}`);
     });
 
     socket.on('disconnect', () => {
@@ -34,8 +31,6 @@ const eventHandler = (io) => {
       socket.username = username;
       const usernames = getUsernames(io, roomID);
       socket.username = setUsername(usernames, socket.username);
-      console.log('usernames');
-      console.log(usernames);
       socket.emit('get-clients', usernames.filter((name) => name !== null));
     });
 
@@ -43,7 +38,9 @@ const eventHandler = (io) => {
       try {
         console.log('pass '+password);
         const room = (await findRoom(name, password))[0];
-        console.log(room);
+        if (room===undefined) {
+          return socket.emit('not found', name);
+        }
         const id = room.room_id;
         console.log(id);
         socket.rooms.forEach((room) => {
@@ -52,6 +49,10 @@ const eventHandler = (io) => {
         socket.currentRoom = id;
         socket.join(id);
         socket.emit('join-room', id, user);
+        socket.username = user;
+        const usernames = getUsernames(io, id);
+        socket.username = setUsername(usernames, socket.username);
+        socket.emit('get-clients', usernames.filter((name) => name !== null));
       } catch (e) {
         console.log('room not found');
         console.log(e);
