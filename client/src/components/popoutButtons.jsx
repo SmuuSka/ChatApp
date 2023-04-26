@@ -9,10 +9,14 @@ const RoomPopup = ({ onJoin, onCreate, mode, onClose }) => {
 
   const handleJoin = () => {
     onJoin(roomName, password);
+    setPassword('')
+    setRoomName('')
   };
 
   const handleCreate = () => {
     onCreate(roomName, password)
+    setPassword('')
+    setRoomName('')
   }
 
   const handleClose = () => {
@@ -27,7 +31,7 @@ const RoomPopup = ({ onJoin, onCreate, mode, onClose }) => {
       <h2>{mode}</h2>
       <label>
         Room Name:
-        <input type="text" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
+        <input type="text" value={roomName} onChange={(e) => setRoomName(e.target.value)} required="true"/>
       </label>
       <label>
         Password:
@@ -55,9 +59,13 @@ const RoomButton = ({socket, user}) => {
   const handleCreate = async (roomName, password) => {
     try {
       const pass = password === '' ? null : password
-      await chatService.createRoom(roomName, pass)
-      setShow(false)
-      socket.emit('join-room-button', roomName, pass, user.username)
+      if (roomName!==''){
+        await chatService.createRoom(roomName, pass)
+        setShow(false)
+        socket.emit('join-room-button', roomName, pass, user.username)
+      } else {
+        alert('room name missing')
+      }
     } catch (e) {
       alert('Room name is already taken')
       console.log(e)

@@ -11,6 +11,7 @@ const Search = ({socket}) => {
     const [messaged, setMessaged] = useState(false);
     const user = getUser()
     const [showPublic, setShowPublic] = useState(user.token === 1)
+
     const onQueryChange = (event) => setRoomQuery(event.target.value);
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const Search = ({socket}) => {
     socket.on('leave-room', () => {
         setCurrentRoom(0)
     })
-
+    
     return(
         <div className="searchBar">
             <div className="searchForm">

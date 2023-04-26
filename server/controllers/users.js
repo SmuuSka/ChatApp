@@ -1,12 +1,23 @@
+/* eslint-disable max-len */
 /* eslint-disable require-jsdoc */
 // eslint-disable-next-line new-cap
 const usersRouter = require('express').Router();
 const bcrypt = require('bcrypt');
-const pool = require('../database');
+const queries = require('../queries');
 
+/**
 
+Lisää uuden käyttäjän tietokantaan.
+@function
+@async
+@param {object} request - HTTP-pyyntöobjekti.
+@param {object} response - HTTP-vastausobjekti.
+@returns {object} - HTTP-Vastausobjekti.
+@throws {object} - HTTP-Virheobjekti, jos rekisteröinti epäonnistuu.
+*/
 usersRouter.post('/', async (request, response) => {
   const {username, password} = request.body;
+
   if (password.length < 3) {
     return response.status(400).json({
       error: 'passwords length must be atleast three',
@@ -16,46 +27,25 @@ usersRouter.post('/', async (request, response) => {
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
-  await saveUser(username, passwordHash);
-  response.status(200).json({username: username, passwordHash: passwordHash});
+  try {
+    await queries.saveUser(username, passwordHash);
+    response.status(201).json({username: username, passwordHash: passwordHash});
+  } catch {
+    response.status(500).json({'error': 'register failed'});
+  }
 });
 
+/**
+ * Hakee kaikki käyttäjät tietokannasta ja palauttaa ne JSON-vastausobjektina.
+ * @function
+ * @async
+ * @param {object} request - HTTP-pyyntöobjekti.
+ * @param {object} response - HTTP-vastausobjekti.
+ * @returns {object} - JSON-vastausobjekti, joka sisältää kaikki käyttäjät tietokannasta.
+ */
 usersRouter.get('/', async (request, response) => {
-  const users = await getUsers();
-  console.log(users);
+  const users = await queries.getUsers();
   return response.status(200).json(users);
 });
-
-
-const saveUser = async (username, password) => {
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    const save = await conn.query(`
-    INSERT INTO users (username, password) 
-    VALUES (?, ?)`, [username, password]);
-    console.log(save);
-    return save;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  } finally {
-    if (conn) await conn.end();
-  }
-};
-
-const getUsers = async () => {
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    const result = await conn.query(`SELECT username FROM users`);
-    return JSON.parse(JSON.stringify(result));
-  } catch (err) {
-    console.log(err);
-    throw err;
-  } finally {
-    if (conn) await conn.end();
-  }
-};
 
 module.exports = usersRouter;

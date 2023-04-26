@@ -1,41 +1,59 @@
+/* eslint-disable max-len */
 /* eslint-disable new-cap */
 const roomRouter = require('express').Router();
 const queries = require('../queries');
 require('dotenv').config();
 
-roomRouter.get('/room/:key', async (request, response) => {
-  if (request.params.key === process.env.API_KEY) {
-    const rooms = await queries.searchRooms();
-    return response.status(200).json(rooms);
-  }
-  return response.status(401).json({'error': 'wrong api key'});
+/**
+ * Hakee kaikki huoneet ja palauttaa listan huoneista, joissa jokainen huone on objekti, jossa on huoneen tunnus ja nimi.
+ * @param {object} request - HTTP-pyynnön objekti
+ * @param {object} response - HTTP-vastauksen objekti
+ * @returns {object} - Lista objekteista, joissa on huoneiden tunnukset ja nimet
+ */
+roomRouter.get('/', async (request, response) => {
+  const rooms = await queries.searchRooms();
+  const roomObject = rooms.map((r) => {
+    return {room_id: r.room_id, room_name: r.room_name};
+  });
+  console.log(rooms);
+  return response.status(200).json(roomObject);
 });
 
-// hakee huoneet joissa käyttäjä on viestitellyt
-roomRouter.get('/user/:username/:key', async (request, response) => {
-  if (request.params.key === process.env.API_KEY) {
-    const rooms = await queries.findUserRooms(request.params.username);
-    return response.json(rooms);
-  }
-  return response.status(401).json({'error': 'wrong api key'});
+/**
+ * Hakee huoneet, joissa käyttäjä on viestitellyt
+ * @param {object} request - HTTP-pyynnön objekti
+ * @param {object} response - HTTP-vastauksen objekti
+ * @returns {array} - Lista huoneista, joissa käyttäjä on viestitellyt
+ */
+roomRouter.get('/user/:username/', async (request, response) => {
+  const rooms = await queries.findUserRooms(request.params.username);
+  return response.status(200).json(rooms);
 });
 
-// hakee julkiset huoneet, eli huoneet joilla ei ole salasanaa.
-roomRouter.get('/public/:key', async (request, response) => {
-  if (request.params.key === process.env.API_KEY) {
-    const rooms = await queries.findAllPublicRooms();
-    return response.json(rooms);
-  }
-  return response.status(401).json({'error': 'wrong api key'});
+/**
+ * Hakee julkiset huoneet, eli huoneet, joilla ei ole salasanaa
+ * @param {object} request - HTTP-pyynnön objekti
+ * @param {object} response - HTTP-vastauksen objekti
+ * @returns {object} - Lista julkisista huoneista
+ */
+roomRouter.get('/public/', async (request, response) => {
+  const rooms = await queries.findAllPublicRooms();
+  const roomObject = rooms.map((r) => {
+    return {room_id: r.room_id, room_name: r.room_name};
+  });
+  return response.status(200).json(roomObject);
 });
 
-roomRouter.delete('/:id', async (request, response) => {
-  const id = request.params.id;
-});
 
+/**
+ * Luo uuden huoneen
+ * @param {object} request - HTTP-pyynnön objekti, jossa on uuden huoneen nimi ja mahdollinen salasana
+ * @param {object} response - HTTP-vastauksen objekti
+ * @returns {object} - Uuden huoneen tiedot
+ */
 roomRouter.post('/', async (request, response) => {
   const {name, password} = request.body;
-  if (name.length ===0 || name.length > 20) {
+  if (name.length === 0 || name.length > 20) {
     return response.status(422).json({
       'error': 'room name is either too long or too short. max length is 20',
     },
@@ -55,7 +73,7 @@ roomRouter.post('/', async (request, response) => {
     return response.status(200).json(rooms);
   } catch (e) {
     return response.status(422).json({
-      'error': 'room name already exists',
+      'error': 'something went wrong',
     });
   }
 });

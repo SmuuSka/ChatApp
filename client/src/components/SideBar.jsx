@@ -35,6 +35,10 @@ const SideBar= ({socket, user, navigate}) =>{
         }
     }
 
+    socket.on('not found', name => {
+        alert(`room ${name} not found`)
+    })
+
     return(
         <div className="sideBarChat">
             <Navbar user={user} navigate={navigate} />
