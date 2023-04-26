@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 import chatService from "../services/chatService";
 import UsernamePopup from "../components/usernamePopup";
 
-const socketio = io('http://localhost:3003');
+const socketio = io('http://192.168.117.128:3003');
 
 
 const Home = ({navigate}) => {
