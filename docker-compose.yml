@@ -41,9 +41,9 @@ services:
       MARIADB_ROOT_HOST: "%"
       MARIADB_PORT: "3306"
       MARIADB_DATABASE: "chat_app"
-      MARIADB_ROOT_PASSWORD: "testi"
-      MARIADB_USER: "user"
-      MARIADB_PASSWORD: "testi"
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
     ports:
       - "3306:3306"
 

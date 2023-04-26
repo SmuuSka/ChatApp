@@ -2,6 +2,8 @@ const server = require('./server');
 const io = require('./socket');
 require('./socketEvents')(io);
 
-server.listen(process.env.PORT, () => {
-  console.log(`serveri on käynnissä portissa: ${process.env.PORT}`);
+const PORT = '3003';
+
+server.listen(PORT, () => {
+  console.log(`serveri on käynnissä portissa: ${PORT}`);
 });
