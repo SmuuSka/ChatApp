@@ -106,7 +106,7 @@ const searchRoom = async (roomName) => {
   try {
     conn = await pool.getConnection();
     console.log('connection succeeded');
-    const room = await conn.query(searchRoomQ, [roomName]);
+    const room = await conn.query(searchRoomQuery, [roomName]);
     console.log('search room query succeeded');
     return JSON.parse(JSON.stringify(room));
   } catch (err) {
@@ -211,6 +211,37 @@ const findRoom = async (name, password) => {
   }
 };
 
+const saveUser = async (username, password) => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const save = await conn.query(`
+    INSERT INTO users (username, password) 
+    VALUES (?, ?)`, [username, password]);
+    console.log(save);
+    return save;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
+const getUsers = async () => {
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const result = await conn.query(`SELECT username FROM users`);
+    return JSON.parse(JSON.stringify(result));
+  } catch (err) {
+    console.log(err);
+    throw err;
+  } finally {
+    if (conn) await conn.end();
+  }
+};
+
 module.exports = {
   createUserTable,
   sendMessage,
@@ -222,4 +253,6 @@ module.exports = {
   findRoom,
   findUser,
   findAllPublicRooms,
+  saveUser,
+  getUsers,
 };

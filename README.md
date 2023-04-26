@@ -1,46 +1,53 @@
-# REST API:n kuvaus
+# REST-API-dokumentaatio
+
+Projektin REST-API tarjoaa seuraavat reitit:
 
 ## Kirjautuminen
 
-### `POST /login`
+### `/login` POST
 
-Kirjautumisreitti vastaanottaa käyttäjänimen ja salasanan POST-pyynnön rungossa (body). Mikäli käyttäjänimi ja salasana ovat oikein, reitti palauttaa JWT-tokenin, jota voi käyttää tunnistautumiseen muiden reittien käytössä. Muussa tapauksessa reitti palauttaa HTTP-virhekoodin 401 ja virheilmoituksen.
+Reitti ottaa vastaan käyttäjänimen ja salasanan. Se tarkistaa, että käyttäjänimi ja salasana ovat oikein, luo tokenin ja palauttaa sen yhdessä käyttäjänimen kanssa vastauksena.
 
 ## Viestit
 
-### `GET /messages/:id`
+### `api/messages/:id` GET
 
-Viestireitti vastaanottaa ID-parametrin ja palauttaa JSON-muodossa kaikki kyseisessä huoneessa lähetetyt viestit.
+Reitti palauttaa kaikki tietyn huoneen viestit. Id-parametri määrittää huoneen.
 
-### `POST /messages/:id`
+### `api/messages/:id` POST
 
-Viestin lähetysreitti vastaanottaa viestin tiedot POST-pyynnön rungossa (body) ja tarkistaa, että viesti on kelvollinen (ei liian pitkä tai lyhyt). Mikäli viesti on kelvollinen, reitti tallentaa viestin tietokantaan ja palauttaa tallennetun viestin tiedot JSON-muodossa.
+Reitti lähettää viestin tiettyyn huoneeseen. Id-parametri määrittää huoneen.
 
 ## Huoneet
 
-### `GET /rooms/room/:key`
+### `api/rooms` GET
 
-Huonereitti vastaanottaa API-avaimen ja palauttaa JSON-muodossa kaikki huoneet, jotka on tallennettu tietokantaan.
+Reitti palauttaa kaikki olemassa olevat huoneet.
 
-### `GET /rooms/user/:username/:key`
+### `api/rooms/user/:username` GET
 
-Tämä huonereitti vastaanottaa API-avaimen ja käyttäjänimen ja palauttaa JSON-muodossa kaikki huoneet, joissa kyseinen käyttäjä on viestitellyt.
+Reitti palauttaa kaikki huoneet, joissa käyttäjä on viestitellyt. Username-parametri määrittää käyttäjänimen.
 
-### `GET /rooms/public/:key`
+### `api/rooms/public` GET
 
-Tämä huonereitti vastaanottaa API-avaimen ja palauttaa JSON-muodossa kaikki julkiset huoneet (huoneet, joissa ei ole salasanaa).
+Reitti palauttaa kaikki julkiset huoneet, eli huoneet joilla ei ole salasanaa.
 
+### `api/rooms` POST
 
-### `POST /rooms/`
-
-Huoneen lisäysreitti vastaanottaa huoneen nimen ja mahdollisen salasanan POST-pyynnön rungossa (body). Reitti tarkistaa, että huoneen nimi on kelvollinen ja salasanan pituus ei ylitä ennalta määrättyä rajaa. Mikäli tiedot ovat kelvolliset, reitti luo uuden huoneen ja tallentaa sen tietokantaan. Muussa tapauksessa reitti palauttaa HTTP-virhekoodin 422 ja virheilmoituksen.
+Reitti luo uuden huoneen annetulla nimellä ja salasanalla.
 
 ## Käyttäjät
 
-### `POST /users/`
+### `api/users` GET
 
-Käyttäjän lisäysreitti vastaanottaa käyttäjänimen ja salasanan POST-pyynnön rungossa (body). Reitti tarkistaa, että salasanan pituus on kelvollinen.
+Reitti palauttaa kaikki olemassa olevat käyttäjät.
 
-### `GET /users/`
+### `api/users` POST
 
-Tämä reitti palauttaa kaikki tietokannassa olevat käyttäjät.
+Reitti luo uuden käyttäjän annetulla käyttäjänimellä ja salasanalla.
+
+## Vastauksen muoto
+
+API vastaa JSON-muodossa.
+
+
