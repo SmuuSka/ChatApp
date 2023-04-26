@@ -40,10 +40,10 @@ const Login = ({navigate}) =>{
         <div className = "formWrapperReg" >
           <div className="spanDiv">
           <span className="titleReg">
-            <h1>Great Chat</h1>
+            <h1>React Chat</h1>
           </span>
             <span className="logoReg" >
-          <img className="RegLogoimg" src="/Icons/Logochat.png"/>
+          <img className="RegLogoimg" src="/logo512.png"/>
         </span>
           </div>
           <form className="form-group" onSubmit={onLogin}>
@@ -52,7 +52,7 @@ const Login = ({navigate}) =>{
             <button id = "buttonLogReg" type="submit" className="btn btn-primary">Login</button>
             <p>Dont have an account? <Link to="/pages/Register">Register</Link></p>
             or <Link to="/pages/home" >continue</Link> as a guest
-           
+
           </form>
         </div>
       </div>);

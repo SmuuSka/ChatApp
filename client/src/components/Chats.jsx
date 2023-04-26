@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
 import Message from "./Message";
-import RoomCreate from "./RoomCreate";
 import ExitRoomButton from "./ExitRoomButton";
 
 const Chats = ({messages, socket, room}) => {
@@ -21,17 +20,18 @@ const Chats = ({messages, socket, room}) => {
     socket.on('get-clients', users => {
         setRoomUsers(users)
     })
-    
+
     if (messages!==[]){
         return(
+            <>
+                {room !== null && <p id = "activeUsers">users active in current room: {roomUsers.length}
+                    <ExitRoomButton onClick={onExit}/> </p>}
             <div className="chatBOX" ref={chatBoxRef}>
                 {/*<RoomCreate/>*/}
-                {room !== null && <p>users active in current room: {roomUsers.length}</p>}
-                <ExitRoomButton onClick={onExit}/>
-                
                 {messages.map(message => <Message key={messages.username} message={message}/>)}
 
             </div>
+            </>
         );
     }
 }
