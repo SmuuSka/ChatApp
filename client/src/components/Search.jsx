@@ -9,13 +9,12 @@ const Search = ({socket}) => {
     const [roomResults, setRoomResults] = useState([]);
     const [currentRoom, setCurrentRoom] = useState(0);
     const [messaged, setMessaged] = useState(false);
-    const [showPublic, setShowPublic] = useState(false)
     const user = getUser()
+    const [showPublic, setShowPublic] = useState(user.token === 1)
     const onQueryChange = (event) => setRoomQuery(event.target.value);
 
     useEffect(() => {
         try {
-            setShowPublic(user.token === 1)
             if (showPublic) {
                 chatService.getPublicRooms().then(response => {
                     setRoomResults(response)
@@ -43,7 +42,7 @@ const Search = ({socket}) => {
     socket.on('leave-room', () => {
         setCurrentRoom(0)
     })
-    
+
     return(
         <div className="searchBar">
             <div className="searchForm">
