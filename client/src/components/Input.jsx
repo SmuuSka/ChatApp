@@ -2,13 +2,11 @@ import React from "react";
 import { useState } from "react";
 import chatService from "../services/chatService";
 import Picker from 'emoji-picker-react';
-import { Emoji } from "emoji-picker-react";
 const Input = ({socket, room}) => {
     const [newMessage, setNewMessage] = useState('')
     const [showPicker, setShowPicker] = useState(false);
 
     const onEmojiClick = (event) => {
-        console.log(event.emoji);
         setNewMessage(prevInput => prevInput + event.emoji);
     };
     const newMessageChange = (event) => setNewMessage(event.target.value)
