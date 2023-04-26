@@ -7,12 +7,10 @@ const findUser = require('../queries').findUser;
 
 loginRouter.post('/', async (request, response) => {
   const {username, password} = request.body;
-
   const user = await findUser(username);
-
   const passwordCorrect = user === undefined ?
     false :
-    await bcrypt.compare(password, user.password);
+    await bcrypt.compare(password, user.user_password);
 
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
@@ -26,7 +24,7 @@ loginRouter.post('/', async (request, response) => {
 
   const token = jwt.sign(
       userForToken,
-      'avain',
+      process.env.SECRET,
       {expiresIn: 2*60*60},
   );
 

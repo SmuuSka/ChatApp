@@ -15,7 +15,7 @@ const saveMessage = `INSERT INTO user_messages
 
 const searchAllRooms = `SELECT * FROM rooms`;
 
-const createQuery = `INSERT INTO rooms (room_id, room_name, password) VALUES (?,?,?)`;
+const createQuery = `INSERT INTO rooms (room_id, room_name, room_password) VALUES (?,?,?)`;
 
 const searchAllMessages = `SELECT * FROM user_messages WHERE room_id = ?`;
 
@@ -23,16 +23,16 @@ const searchRoomQuery = `SELECT * FROM rooms WHERE room_name = ?`;
 
 const deleteRoomQuery = `SELECT * FROM rooms WHERE room_id = ?`;
 
-const findPublicRoom = `SELECT * FROM rooms WHERE room_name = ? AND password IS NULL`;
+const findPublicRoom = `SELECT * FROM rooms WHERE room_name = ? AND room_password IS NULL`;
 
-const findPublicRooms = `SELECT * FROM rooms WHERE password IS NULL`;
+const findPublicRooms = `SELECT * FROM rooms WHERE room_password IS NULL`;
 
 const userRoomsQuery = `SELECT DISTINCT user_messages.room_id, rooms.room_name 
                         FROM user_messages, rooms 
                         WHERE user_messages.username = ? 
                         AND user_messages.room_id = rooms.room_id`;
 
-const findRoomQuery = `SELECT * FROM rooms WHERE room_name = ? AND password = ?`;
+const findRoomQuery = `SELECT * FROM rooms WHERE room_name = ? AND room_password = ?`;
 
 const createWihtoutPassword = `INSERT INTO rooms (room_id, room_name) VALUES (?,?)`;
 

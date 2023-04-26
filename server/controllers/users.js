@@ -32,7 +32,7 @@ const saveUser = async (username, password) => {
   try {
     conn = await pool.getConnection();
     const save = await conn.query(`
-    INSERT INTO users (username, password) 
+    INSERT INTO users (username, user_password) 
     VALUES (?, ?)`, [username, password]);
     console.log(save);
     return save;

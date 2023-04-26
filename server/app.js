@@ -20,8 +20,8 @@ app.use('/api/login', loginRouter);
 app.use('/api/rooms', roomRouter);
 app.use('/api/messages', messageRouter);
 
-// const queries = require('./queries');
-// queries.createUserTable();
+const queries = require('./queries');
+queries.createUserTable();
 
 
 app.get('/', (request, response) => {
