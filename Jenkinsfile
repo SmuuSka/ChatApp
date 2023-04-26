@@ -34,17 +34,7 @@ pipeline {
 
             }
             steps {
-                sh '''
-                docker compose build
-                --build-arg REACT_APP_API_KEY='$REACT_APP_API_KEY'
-                --build-arg USER='$USER'
-                --build-arg PASSWORD='$PASSWORD'
-                --build-arg SECRET='$SECRET'
-                --build-arg API_KEY='$API_KEY'
-                --build-arg MARIADB_ROOT_PASSWORD='$MARIADB_ROOT_PASSWORD'
-                --build-arg MARIADB_USER='$MARIADB_USER'
-                --build-arg MARIADB_PASSWORD='$MARIADB_PASSWORD'
-                '''
+                sh "docker compose build --build-arg REACT_APP_API_KEY='$REACT_APP_API_KEY' --build-arg USER='$USER' --build-arg PASSWORD='$PASSWORD'--build-arg SECRET='$SECRET' --build-arg API_KEY='$API_KEY' --build-arg MARIADB_ROOT_PASSWORD='$MARIADB_ROOT_PASSWORD' --build-arg MARIADB_USER='$MARIADB_USER' --build-arg MARIADB_PASSWORD='$MARIADB_PASSWORD'"
                 sh "docker compose up -d"
                 sh "docker compose ps"
             }
