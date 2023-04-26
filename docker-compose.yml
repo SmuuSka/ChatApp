@@ -13,7 +13,7 @@ services:
     networks:
       chat-app-network:
     environment:
-      REACT_APP_API_KEY:
+      REACT_APP_API_KEY: ${REACT_APP_API_KEY}
 
   api:
     build:
@@ -27,11 +27,11 @@ services:
       chat-app-network:
         ipv4_address: 172.25.0.9
     environment:
-      USER:
-      PASSWORD:
-      PORT:
-      SECRET:
-      API_KEY:
+      USER: ${USER}
+      PASSWORD: ${PASSWORD}
+      PORT: ${PORT}
+      SECRET: ${SECRET}
+      API_KEY: ${API_KEY}
 
   client:
     stdin_open: true
@@ -57,9 +57,9 @@ services:
       MARIADB_ROOT_HOST: '%'
       MARIADB_PORT: '3306'
       MARIADB_DATABASE: 'chat_app'
-      MARIADB_ROOT_PASSWORD:
-      MARIADB_USER:
-      MARIADB_PASSWORD:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
     ports:
       - '3306:3306'
     networks:
