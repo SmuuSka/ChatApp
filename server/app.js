@@ -25,7 +25,7 @@ queries.createUserTable();
 
 
 app.get('/', (request, response) => {
-  return response.send({name: 'samu'});
+  return response.send({name: 'moi'});
 });
 
 module.exports = app;

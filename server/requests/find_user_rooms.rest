@@ -1,1 +1,1 @@
-GET http://localhost:3003/api/rooms/joel
+GET http://localhost:3003/api/rooms/user/joel
