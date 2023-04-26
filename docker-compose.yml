@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 services:
   nginx:
     depends_on:
@@ -9,7 +9,11 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - "3050:80"
+      - '3050:80'
+    networks:
+      chat-app-network:
+    environment:
+      REACT_APP_API_KEY:
 
   api:
     build:
@@ -18,7 +22,16 @@ services:
     volumes:
       - /app/node_modules
     ports:
-      - "3003:3003"
+      - '3003:3003'
+    networks:
+      chat-app-network:
+        ipv4_address: 172.25.0.9
+    environment:
+      USER:
+      PASSWORD:
+      PORT:
+      SECRET:
+      API_KEY:
 
   client:
     stdin_open: true
@@ -30,32 +43,48 @@ services:
     volumes:
       - /app/node_modules
     ports:
-      - "3000:3000"
+      - '3000:3000'
+    networks:
+      chat-app-network:
+        ipv4_address: 172.25.0.8
 
   mariadb:
     image: mariadb:latest
     restart: always
     volumes:
-      - "./setup.sql:/docker-entrypoint-initdb.d/setup.sql"
+      - './setup.sql:/docker-entrypoint-initdb.d/setup.sql'
     environment:
-      MARIADB_ROOT_HOST: "%"
-      MARIADB_PORT: "3306"
-      MARIADB_DATABASE: "chat_app"
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-      MARIADB_USER: ${MARIADB_USER}
-      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_ROOT_HOST: '%'
+      MARIADB_PORT: '3306'
+      MARIADB_DATABASE: 'chat_app'
+      MARIADB_ROOT_PASSWORD:
+      MARIADB_USER:
+      MARIADB_PASSWORD:
     ports:
-      - "3306:3306"
+      - '3306:3306'
+    networks:
+      chat-app-network:
+        ipv4_address: 172.25.0.10
 
   phpmyadmin:
     image: phpmyadmin
     restart: always
     expose:
-      - "8000"
+      - '8000'
     ports:
-      - "8000:80"
+      - '8000:80'
     environment:
       - PMA_HOST=mariadb
       - PMA_PORT=3306
     links:
       - mariadb
+    networks:
+      chat-app-network:
+
+networks:
+  chat-app-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
