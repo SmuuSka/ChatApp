@@ -3,6 +3,12 @@
 const pool = require('./database');
 const crypto = require('crypto');
 
+const createTable = `
+    CREATE TABLE IF NOT EXISTS users ( 
+        username varchar(50) PRIMARY KEY NOT NULL, 
+        password varchar(255) NOT NULL
+    )`;
+
 const saveMessage = `INSERT INTO user_messages 
                     (username, room_id, message_content, created_at) 
                     VALUES (?, ?, ?, ?)`;
