@@ -7,6 +7,7 @@ const Input = ({socket, room}) => {
     const [showPicker, setShowPicker] = useState(false);
 
     const onEmojiClick = (event) => {
+        console.log(event.emoji)
         setNewMessage(prevInput => prevInput + event.emoji);
     };
     const newMessageChange = (event) => setNewMessage(event.target.value)
