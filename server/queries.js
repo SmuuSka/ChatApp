@@ -37,6 +37,12 @@ const findRoomQuery = `SELECT * FROM rooms WHERE room_name = ? AND room_password
 const createWihtoutPassword = `INSERT INTO rooms (room_id, room_name) VALUES (?,?)`;
 
 
+/**
+ * Luo users-taulun tietokantaan.
+ *
+ * @async
+ * @function createUserTable
+ */
 const createUserTable = async () => {
   let conn;
   try {
@@ -51,6 +57,15 @@ const createUserTable = async () => {
     if (conn) await conn.end();
   }
 };
+
+
+/**
+ * Lähettää viestin tietokantaan.
+ *
+ * @async
+ * @param {Object} message - Viesti-objekti, joka sisältää seuraavat avaimet: from (lähettäjän nimi), roomID (huoneen ID), content (viestin sisältö) ja time (viestin aikaleima).
+ * @returns {Object} - Palauttaa viesti-objektin, joka sisältää samat avaimet kuin syöte.
+ */
 
 const sendMessage = async (message) => {
   let conn;
@@ -73,6 +88,13 @@ const sendMessage = async (message) => {
   }
 };
 
+/**
+ * Etsii kaikki huoneet tietokannasta.
+ *
+ * @async
+ * @returns {Array} - Palauttaa taulukon, joka sisältää kaikki huoneet tietokannassa.
+ */
+
 const searchRooms = async () => {
   let conn;
   try {
@@ -86,7 +108,13 @@ const searchRooms = async () => {
     if (conn) await conn.end();
   }
 };
+// Hakee kaikki julkiset huoneet tietokannasta
+/**
 
+Hakee kaikki julkiset huoneet tietokannasta.
+@async
+@function
+*/
 const findAllPublicRooms = async () => {
   let conn;
   try {
@@ -101,6 +129,14 @@ const findAllPublicRooms = async () => {
   }
 };
 
+// Hakee huoneen nimen perusteella tietokannasta
+/**
+
+Hakee huoneen nimen perusteella tietokannasta.
+@async
+@function
+@param {string} roomName - Haettavan huoneen nimi.
+*/
 const searchRoom = async (roomName) => {
   let conn;
   try {
@@ -116,7 +152,14 @@ const searchRoom = async (roomName) => {
     if (conn) await conn.end();
   }
 };
+/**
 
+Luo uuden huoneen tietokantaan.
+@async
+@function
+@param {string} roomName - Huoneen nimi.
+@param {string} [password] - Salasana huoneelle. Jos jätetään tyhjäksi, huone luodaan ilman salasanaa.
+*/
 const createRoom = async (roomName, password) => {
   let conn;
   try {
@@ -138,7 +181,12 @@ const createRoom = async (roomName, password) => {
     if (conn) await conn.end();
   }
 };
-
+/**
+ * Hakee kaikki annetun huoneen viestit tietokannasta.
+ * @async
+ * @function
+ * @param {string} roomID - Huoneen ID, jonka viestit halutaan hakea.
+ */
 const searchMessages = async (roomID) => {
   let conn;
   try {
@@ -156,6 +204,12 @@ const searchMessages = async (roomID) => {
   }
 };
 
+/**
+ * Hakee käyttäjän tiedot käyttäjänimen perusteella tietokannasta.
+ * @async
+ * @function
+ * @param {string} username - Käyttäjänimi.
+ */
 const findUser = async (username) => {
   let conn;
   try {
@@ -173,6 +227,13 @@ const findUser = async (username) => {
   }
 };
 
+
+/**
+ * Hakee käyttäjän kaikki huoneet tietokannasta.
+ * @async
+ * @function
+ * @param {string} username - Käyttäjänimi.
+ */
 const findUserRooms = async (username) => {
   let conn;
   try {
@@ -189,6 +250,13 @@ const findUserRooms = async (username) => {
   }
 };
 
+/**
+ * Etsii huonetta tietokannasta sen nimen ja mahdollisen salasanan perusteella.
+  * @async
+ * @function
+ * @param {string} name - Haettavan huoneen nimi.
+ * @param {string|null} password - Haettavan huoneen salasana, tai null jos huone on julkinen.
+ */
 const findRoom = async (name, password) => {
   let conn;
   let rooms;
@@ -211,6 +279,14 @@ const findRoom = async (name, password) => {
   }
 };
 
+/**
+ * Tallentaa uuden käyttäjän tietokantaan.
+ * @async
+ * @function
+ * @param {string} username - Uuden käyttäjän käyttäjänimi.
+ * @param {string} password - Uuden käyttäjän salasana.
+ * @throws {Error} - Heittää poikkeuksen, jos tallentaminen epäonnistuu.
+ */
 const saveUser = async (username, password) => {
   let conn;
   try {
@@ -228,6 +304,11 @@ const saveUser = async (username, password) => {
   }
 };
 
+/**
+ * Hakee kaikki käyttäjät tietokannasta.
+ * @async
+ * @function
+ */
 const getUsers = async () => {
   let conn;
   try {
