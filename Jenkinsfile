@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage("verify tooling"){
             steps {
+            // Tarkistaa, asentaa ja päivittää tarvittavat paketit Dockerin käyttämiseen.
                 sh'''
                     whoami
                     apt-get update
@@ -18,11 +19,13 @@ pipeline {
           }
           stage("Prune Docker data"){
             steps{
-                sh 'docker system prune -a --volumes -f'
+                // Poistaa käyttämättömät Dockeriin liittyvät tiedostot
+                sh 'docker system prune -a -f'
                 }
           }
           stage('Build Stage') {
-            environment { 
+            environment {
+                // Injektoidaan kirjautumistiedot ja kriittiset informaatiot
                 MARIADB_ROOT_PASSWORD = credentials('DB_ROOT')
                 MARIADB_USER = credentials('DB_USER')
                 MARIADB_PASSWORD = credentials('DB_USER_PASS')
@@ -34,6 +37,7 @@ pipeline {
 
             }
             steps {
+                // Lisätään muuttujat Dockerin argumenteiksi ja kootaan sovellus
                 sh "docker compose build --build-arg REACT_APP_API_KEY='$REACT_APP_API_KEY' --build-arg USER='$USER' --build-arg PASSWORD='$PASSWORD' --build-arg SECRET='$SECRET' --build-arg API_KEY='$API_KEY' --build-arg MARIADB_ROOT_PASSWORD='$MARIADB_ROOT_PASSWORD' --build-arg MARIADB_USER='$MARIADB_USER' --build-arg MARIADB_PASSWORD='$MARIADB_PASSWORD'"
                 sh "docker compose up -d"
                 sh "docker compose ps"

@@ -1,7 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from 'axios';
-//const url = 'http://localhost:3003/api/'
-const url = 'http://192.168.109.128:3003/api/'
+const url = 'http://localhost:3003/api/'
 let token = null;
 
 const setToken = token => {
