@@ -5,6 +5,10 @@ import {Route, Routes, useNavigate} from "react-router-dom";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import "./cssFiles/Chat.css";
+/**
+ Komponentti, joka sisältää sovelluksen reitityksen.
+ @returns {JSX.Element}
+ */
 function App() {
   const navigate = useNavigate();
   return (

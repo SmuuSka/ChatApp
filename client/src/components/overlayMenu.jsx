@@ -6,18 +6,36 @@ import "../cssFiles/Main.css";
 import RoomButton from "./popoutButtons";
 import Search from "./Search";
 
+/**
+ Komponentti, joka renderöi overlay-menun, joka sisältää nappeja huoneiden liittymistä ja huoneiden luomista varten.
+ @param {object} socket - Socket.io -olio kommunikointia varten palvelimen kanssa.
+ @param {object} user - Objekti, joka sisältää käyttäjän tiedot, kuten käyttäjänimi.
+ @returns {JSX.Element} Overlay-menun React-komponentin.
+ */
+
 const OverlayMenu = ({socket, user}) => {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
+  /**
+   Käsittelee napin painalluksen ja vaihtaa overlay-menun näkyvyyttä.
+   */
   const handleToggle = () => {
     setShowMenu(!showMenu);
   };
 
+  /**
+   Estää sisällön klikkauksen välittymisen overlay-menun ulkopuolelle.
+   @param {event} e - Klikkaustapahtuma.
+   */
+
   const handleContentClick = (e) => {
-    // Prevent the menu from closing when you click on its content
     e.stopPropagation();
   };
+
+  /**
+   Käsittelee overlay-menun sulkemisen painikkeen painalluksen.
+   */
 
   const handleExitClick = () => {
     setShowMenu(false);
