@@ -3,20 +3,40 @@ import React, {useState} from "react";
 import registerService from '../services/registerService';
 import {Link} from "react-router-dom";
 
+/**
+ Komponentti, joka näyttää rekisteröintilomakkeen
+ @param {object} navigate - React-routerin navigointiobjekti
+ @returns {JSX.Element} - Palauttaa JSX-koodin
+ */
+
 const Register = ({navigate}) =>{
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  /**
+   Funktio, joka käsittelee käyttäjänimen muutokset
+   @param {object} event - Event-objekti
+   */
 
   const usernameChange = (event) => {
     setUsername(event.target.value)
     console.log(username)
   }
 
+  /**
+   Funktio, joka käsittelee salasanan muutokset
+   @param {object} event - Event-objekti
+   */
   const passwordChange = (event) => {
     setPassword(event.target.value)
     console.log(password)
   }
+
+  /**
+   Funktio, joka käsittelee lomakkeen submit-tapahtuman
+   @param {object} event - Event-objekti
+   */
 
   const onRegisterSubmit = async (event) => {
     event.preventDefault();

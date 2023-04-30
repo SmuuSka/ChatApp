@@ -1,0 +1,625 @@
+/*Tietokone koko*/
+@media screen and (max-width: 600px) {
+    /*Luo huone napit*/
+    .join-create-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20%;
+        width: 100%;
+    }
+    /*Liity huoneisiin nappi*/
+    .join-room-button {
+        display: inline-block;
+        margin: 2%;
+        padding: 1%;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #FFF;
+        background: linear-gradient(to bottom, #F25C05, #F27405);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        justify-content: space-between;
+    }
+    /*Sivupalkki missä näkyy huoneet, liity ja luo napit.*/
+    .sideBarChat{
+        display: grid;
+        align-items: end;
+        align-self: baseline;
+        justify-self: left;
+        height: 25%;
+        max-height: 300px;
+    }
+    /*Etsi palkki*/
+
+    .searchBar {
+        border-bottom: 1px solid black;
+        width: 100%;
+        margin-bottom: auto;
+    }
+    /*Koko keskustelu ruudu (löytyy syöte kentätkin sisältä)*/
+    .chat{
+        overflow-y: scroll;
+        height: 80vh;
+    }
+    /*Koko sivu komponentti*/
+    .home{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        margin-top: 10%;
+    }
+    /*Lähetä viesti kenttä*/
+    .input-field {
+        margin: 5px 0;
+        padding: 6px;
+        background-color: #888C81;
+        border-radius: 5px;
+    }
+    /*Keskustelu ruudu (mihin keskustelut tulee)*/
+    .chatBOX{
+        padding: 1%;
+        height: 100%;
+        margin-bottom: auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-height: 80%;
+        position: relative;
+    }
+    /*Täältä löytyy Logout nappi,oma nimi ja kuva*/
+    .chatNavbar{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(to right, #F2B279, #F2E7DC);
+        height: 65px;
+        justify-content: space-between;
+        width: 100%;
+        z-index: 2;
+    }
+    /*Luo huoneen X nappi*/
+    #exitButtoncreateRoom{
+        padding: 10px;
+        margin-top: 20px;
+        border: none;
+        background: linear-gradient(to bottom, #F25C05, #F27405);
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 7%;
+    }
+    /*Luo Huone nappi*/
+    #buttoncreateRoom{
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 5%;
+        background: linear-gradient(to bottom, #F25C05, #F27405);
+    }
+    /*Luo huone  ja liity huoneseen popup.*/
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        background: linear-gradient(to bottom, #ffffff, #c4e9ec);
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        max-width: 90%;
+        width: 400px;
+        z-index: 3;
+    }
+    /*Lähetä viesti kenttä*/
+    #chatInputBox{
+        padding: 1px;
+        display: flex;
+
+    }
+    /*Lähetä viesti nappi*/
+    #chatSendMessageButtonImg{
+        background-size: cover;
+        width: 50px;
+    }
+    /*Huoneet jotka tulee listaan.*/
+    .searchFriendChatInfo{
+        padding: 10px;
+        display: flex;
+        gap: 10px;
+        cursor: pointer;
+        color: black;
+        align-items: center;
+        overflow: hidden;
+    }
+    /*Kirjaudu ulos nappi*/
+    .buttonLogout{
+        background: linear-gradient(to bottom, #fa6000, #ffce7d);
+        border-radius: 5px;
+    }
+    /*Liity ja luo napit jotka on listalla*/
+    .join-create-buttons {
+        display: flex;
+        justify-content: center;
+        margin: 1%;
+        width: 100%;
+    }
+
+    .join-room-button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+    #joinRoomButton {
+        color: #FFF;
+        background: linear-gradient(to bottom, #918F8F, #2B221B);
+        border-radius: 5px;
+    }
+}
+
+/*Puhelimen koko*/
+@media screen and (min-width: 600px) {
+    .dropdown-menu.show {
+        transform: translate3d(-160px, -478px, 0px) !important;
+    }
+
+    .buttonLogout {
+        background: linear-gradient(to bottom, #fab300, #ffffff);
+        margin-right: 10%;
+        border-radius: 5px;
+    }
+
+    .join-create-buttons {
+        display: flex;
+        justify-content: center;
+        margin: 1%;
+        width: 100%;
+    }
+
+    .searchFriendChatInfo {
+        padding: 10px;
+        display: flex;
+        gap: 10px;
+        cursor: pointer;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    #joinRoomButton {
+        color: #FFF;
+        background: linear-gradient(to bottom, #918F8F, #2B221B);
+        border-radius: 5px;
+    }
+
+    .sideBarChat {
+        display: flex;
+        background-color: #F2E7DC;
+        align-items: end;
+        overflow: auto;
+        flex-direction: column-reverse;
+    }
+
+    .searchBar {
+        border-bottom: 1px solid black;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+    }
+
+    .chat {
+        padding-right: 0;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        margin: 0.5%;
+    }
+
+    .home {
+        max-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 10px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .input-field {
+        margin: 5px 0;
+        padding: 6px;
+        background: linear-gradient(to bottom, #F2E7DC, #F27405);
+        border-radius: 5px;
+    }
+
+    .chatBOX {
+        margin-bottom: auto;
+        height: 100%;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .chatNavbar {
+        display: flex;
+        align-items: center;
+        background: linear-gradient(to bottom, #F2913D, #F2913D);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        height: 65px;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+
+    .join-room-button {
+        display: inline-block;
+        margin: 2%;
+        padding: 1%;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #FFF;
+        background: linear-gradient(to bottom, #F25C05, #F27405);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        justify-content: space-between;
+    }
+
+    .join-room-button:hover {
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+        transform: translateY(-2px);
+    }
+
+    #exitButtoncreateRoom {
+        padding: 10px;
+        margin-top: 20px;
+        border: none;
+        background: linear-gradient(to bottom, #F25C05, #F27405);
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 5%;
+    }
+
+    #buttoncreateRoom {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        border: none;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 5%;
+        background: linear-gradient(to bottom, #F25C05, #F27405);
+    }
+
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        background: linear-gradient(to bottom, #ffffff, #c4e9ec);
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        max-width: 90%;
+        width: 400px;
+        z-index: 3;
+    }
+
+    #chatInputBox {
+        padding: 1px;
+        display: flex;
+
+    }
+
+    #chatSendMessageButtonImg {
+        background-size: cover;
+        width: 50px;
+    }
+}
+.chatMessageColumn{
+    display: flex;
+    align-items: baseline;
+    margin: 2%;
+}
+#chatMessageText{
+    align-self: center;
+}
+#chatTextInput{
+    padding: 4px;
+}
+#chatUserImg{
+    background-color: aliceblue;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+    object-fit: cover;
+}
+#chatUserName{
+    width: 100%;
+}
+.chatTextInput{
+    height: 50px;
+    background-color: white;
+    align-items: center;
+    display: flex;
+    outline: none;
+    margin-right: auto;
+    width: 100%;
+    border-radius: 10px;
+}
+#chatMessageDate{
+    margin: 3%;
+}
+#chatMessageDivUserName{
+    align-self: flex-start;
+    margin-left: 2%;
+}
+.chatBOX{
+    overflow: auto;
+}
+
+.userNavbar{
+    display: flex;
+    width: 70%;
+    margin: auto;
+    flex-direction: initial;
+    justify-content: flex-end;
+}
+
+.searchInput{
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 10%;
+    border-radius: 8px;
+    border: none;
+    color: black;
+    outline: none;
+    background-color: rgba(253, 253, 253, 0.77);
+}
+.searchInput::placeholder{
+    color: black;
+}
+.searchForm{
+    padding: 10px;
+    align-items: center;
+    display: grid;
+}
+#searchbarTitle{
+    text-align: center;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-bottom: 5%;
+}
+#searchFriendImage{
+    width: 70px;
+    height: 70px;
+    border-radius: 24%;
+    object-fit: cover;
+    overflow: hidden;
+}
+#chatMessageImage{
+    width: 70px;
+    height: 70px;
+    border-radius: 24%;
+    object-fit: cover;
+    overflow: hidden;
+}
+.searchFriendChatInfo:hover{
+    background: linear-gradient(to bottom, #fac3a0, #ff9a57);
+}
+#searchUsername{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.message-avatar {
+    margin-right: 10px;
+}
+
+.message-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.message-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.message-content {
+    background-color: #f1f0f0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #999999;
+    margin-top: 5px;
+}
+
+#chatTextInput[type="text"] {
+    flex-grow: 1;
+    padding: 1%;
+    border: none;
+    border-bottom: 2px solid gray;
+    font-size: 16px;
+    outline: none;
+}
+
+#chatSendMessageButton[type="submit"] {
+    margin-left: 10px;
+    padding: 1% 2%;
+    background: linear-gradient(to bottom, #d78f4d, #d2bb88);
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+#createRoomButtonConfirm{
+    margin-top: 0;
+}
+#chatSendMessageButton[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+#roomCreation{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    overflow: auto;
+}
+#roomImageTitle,#roomNameTitle{
+    margin: 2%;
+}
+
+.popup h2 {
+    margin-top: 0;
+}
+
+.popup label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.popup input[type="text"],
+.popup input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.join-create-buttons h3 {
+    display: inline;
+}
+.sideTitle {
+    width: 100%;
+    text-align: center;
+}
+.overlay-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* darker shade of black */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 9999;
+}
+
+.overlay-menu.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-menu-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #F2E7DC;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 80%;
+    height: 90%;
+    overflow-y: auto;
+}
+#activeUsers{
+    display: flex;
+}
+
+.exit-room-button {
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #f44336;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.exit-room-button:hover {
+    background-color: #d32f2f;
+}
+
+.exit-room-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.3);
+}
+
+.exit-room-button span {
+    margin-left: 8px;
+}
+
+.popout {
+    position: relative;
+}
+
+.exit-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 24px;
+}
+
+.exit-button:hover {
+    color: #f44336;
+}
+
+.continue {
+    margin: 0;
+    padding: 0;
+}

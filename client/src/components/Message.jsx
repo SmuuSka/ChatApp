@@ -1,3 +1,8 @@
+/**
+ Komponentti, joka renderöi yksittäisen viestin.
+ @param {Object} message - Objekti, joka sisältää viestin tiedot, kuten viestin sisällön, lähettäjän käyttäjänimen ja luomisajan.
+ @returns {JSX.Element} - Palauttaa viestin HTML-rakenteen sisältäen käyttäjänimen, viestin sisällön, luomisajan ja käyttäjän profiilikuvan.
+ */
 const Message = ({message}) => {
     return(
         <div class="message">

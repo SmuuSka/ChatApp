@@ -1,17 +1,43 @@
+
+/**
+ Navbar-komponentti, joka näyttää käyttäjänimen ja login/logout -napit.
+ @param {Object} user - Käyttäjäobjekti, joka sisältää käyttäjänimen.
+ @param {Function} navigate - Funktio, jolla navigoidaan sivulta toiselle.
+ @returns {JSX.Element} - Navbar-elementti.
+ */
+
 const Navbar= ({user, navigate}) =>{
+
+    /**
+     Kirjautumisnappula.
+     @returns {JSX.Element} - Login-nappula.
+     */
 
   const loginButton = () => (
     <button className="buttonLogin" onClick={onLogin}>Login</button>
   )
-  
+
+    /**
+     Uloskirjautumisnappula.
+     @returns {JSX.Element} - Logout-nappula.
+     */
+
   const logoutButton = () => (
     <button className="buttonLogout" onClick={onLogout}>Logout</button>
   )
-  
+
+    /**
+     Kirjaa käyttäjän ulos ja tyhjentää local storagen.
+     */
+
   const onLogout = () => {
     localStorage.clear()
     navigate('/')
   }
+
+    /**
+     Siirtää käyttäjän login-sivulle.
+     */
 
   const onLogin = () => {
     navigate('/')
