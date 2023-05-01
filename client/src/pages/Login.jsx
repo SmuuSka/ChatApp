@@ -5,20 +5,35 @@ import {Route, Routes,Link} from 'react-router-dom';
 import loginService from '../services/loginService';
 import Register from "./Register";
 
+/** Tämä komponentti renderöi kirjautumissivun.
+ @param {function} navigate - Funktio, joka navigoi käyttäjän toiselle sivulle.
+ */
+
 const Login = ({navigate}) =>{
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  /** Tämä funktio käsittelee muutokset käyttäjänimen syötteessä.
+   @param {object} event - Käyttäjänimen syötteestä tuleva event-objekti.
+   */
   const usernameChange = (event) => {
     setUsername(event.target.value)
     console.log(username)
   }
 
+  /** Tämä funktio käsittelee muutokset salasanan syötteessä.
+   @param {object} event - Salasanan syötteestä tuleva event-objekti.
+   */
+
   const passwordChange = (event) => {
     setPassword(event.target.value)
     console.log(password)
   }
+
+  /** Tämä funktio käsittelee kirjautumistapahtuman.
+   @param {object} event - Lomakkeen submit-tapahtumasta tuleva event-objekti.
+   */
 
   const onLogin = async (event) => {
     event.preventDefault()

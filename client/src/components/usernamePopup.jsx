@@ -1,10 +1,14 @@
 import { useState } from "react";
-
+/**
+ * Edustaa komponenttia, joka näyttää ponnahdusikkunan, jossa käyttäjää pyydetään syöttämään väliaikainen käyttäjänimi.
+ * @param setUser Tämä asettaa vieraille annetun nimen. (Guest name)
+ * @returns {JSX.Element} - Palauttaa UsernamePopup-komponentti.
+ * */
 const UsernamePopup = ({user,setUser }) => {
 
     const [tempUsername, setTempUsername] = useState(null)
     const [entered, setEntered] = useState(false);
-    
+
     const setUsername = () => {
         const user = {username: tempUsername, token: 1}
         localStorage.setItem('chatUser', JSON.stringify(user))
