@@ -3,10 +3,10 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 
 const sql = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
+  host: '172.25.0.10',
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: 'chat_app',
+  port: '3306',
 };
 module.exports = {sql, PORT};
