@@ -1,11 +1,5 @@
 # ChatApp
 
-## Linkit
-
--Itse sovellus: http://10.114.32.6:3000/
-
-Sovelluksen kokeilemiseen tarvitset Metropolian VPN-yhteyden tai sinun on oltava eduroam-verkossa.
-
 ## Käyttötarkoitus ja toimintaperiaate
 
 Sovelluksen käyttötarkoitus on toimia eräänlaisena chat-sovelluksena, missä käyttäjät pystyvät keskustella toistensa kanssa omissa chat-huoneissa.  Sovellus tarjoaa mahdollisuuden huoneiden luomiseen ja niihin liittymiseen. <br/> <br/>  Sovelluksen käyttäjäryhmiin kuuluu kirjautumattomat ja kirjautuneet käyttäjät. Kirjautuneille käyttäjille tallentuu tieto huoneista, joissa he ovat aiemmin keskustelleet. Kirjautumattomat käyttäjät valitsevat ennen keskustelumahdollisuutta oman väliaikaisen nimen. <br/><br/> Keskusteluhuoneita on kahdenlaisia. Salasanattomia ja salasanallisia. Salasanattomat huoneet näkyvät sivupalkissa kirjautumattomille käyttäjille ja niihin pystyy liittyä syöttämättä salasanaa. Salasanalliset huoneet näkyvät kirjautuneille käyttäjille jos käyttäjä on aikasemmin liittynyt sinne ja lähettänyt sinne viestin/viestejä. Molemmpien kaltaisiin huoneisiin on mahdollisuus liittyä "Join Room" napista. Sivupalkissa on myös hakutoiminallisuus.
